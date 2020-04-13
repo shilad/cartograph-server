@@ -1,6 +1,6 @@
 [DEFAULT]
-dataset: simple
-experiment: 0001
+dataset: food
+experimentID: 0004
 
 [PreprocessingConstants]
 sample_size: 50000

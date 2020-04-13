@@ -19,7 +19,7 @@ class CountryService:
                       fields=['labels', 'clusterid'],
                       simplification=self.simplifications,
                       labelField='labels'
-                      ),
+                      )
             # PolyLayer('centroid_contours',
             #           path=config.get('MapData', 'centroid_contours_geojson'),
             #           fields=['clusterid', 'contournum', 'contourid'],

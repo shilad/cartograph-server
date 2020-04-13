@@ -1,7 +1,7 @@
 import colour
 import palettable.colorbrewer.diverging as dv
 
-from cartograph.metrics.Utils import color_from_code
+from metrics.Utils import color_from_code
 
 
 class DivergingMetric:

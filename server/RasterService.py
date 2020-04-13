@@ -4,7 +4,7 @@ import os
 import colorsys
 import tempfile
 
-import colour
+# import colour
 import subprocess
 
 from server.CountryService import CountryService
@@ -19,7 +19,7 @@ import time
 import sys
 
 
-import Config
+from Config_revise import Config
 
 from math import pi, cos, sin, log, exp, atan
 
@@ -146,11 +146,11 @@ class RasterService:
         for pinfo in polys:
             layer, shp, props = pinfo
             if layer == 'countries':
-                polysByName[props['clusterId']] = shp
-                clusterIds.add(props['clusterId'])
+                polysByName[props['clusterID']] = shp
+                clusterIds.add(props['clusterID'])
             else:
                 assert(layer == 'centroid_contours')
-                polysByName[props['clusterId'], int(props['contourNum'])] = shp
+                polysByName[props['clusterID'], int(props['contourNum'])] = shp
 
         numContours = self.conf.getint('PreprocessingConstants', 'num_contours')
         colors = Config.getFullColorWheel()
@@ -159,7 +159,11 @@ class RasterService:
         # First draw clusters
         for i in clusterIds:
             shp = polysByName[i]
-            c = metric.adjustCountryColor(colors[i][numContours], 0)
+            logging.warning("SSSSSSSSSSSSSSSSSSSSSSSS")
+            logging.warning(i)
+            logging.warning(numContours)
+            logging.warning(colors)
+            c = metric.adjustCountryColor(colors[str(i)][int(numContours)], 0)
             self._drawPoly(z, x, y, context, shp, c, (0.7, 0.7, 0.7))
             for j in range(numContours):
                 if (i, j) in polysByName:
@@ -246,16 +250,16 @@ class RasterService:
                 # cr.line_to(xc, yc)
 
 
-if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stderr, level=logging.INFO)
-    conf = Config.initConf(sys.argv[1])
-    ps = PointService(conf)
-    cs = CountryService(conf)
-    ms = RasterService(conf, ps, cs)
-    t0 = time.time()
-    ms.renderTile('gender', 2, 1, 1, 'tile1.png')
-    print time.time() - t0
-    print os.path.getsize('tile1.png')
-    os.system('open tile1.png')
-
-
+# if __name__ == '__main__':
+#     logging.basicConfig(stream=sys.stderr, level=logging.INFO)
+#     conf = Config.initConf(sys.argv[1])
+#     ps = PointService(conf)
+#     cs = CountryService(conf)
+#     ms = RasterService(conf, ps, cs)
+#     t0 = time.time()
+#     ms.renderTile('gender', 2, 1, 1, 'tile1.png')
+#     print time.time() - t0
+#     print os.path.getsize('tile1.png')
+#     os.system('open tile1.png')
+#
+#

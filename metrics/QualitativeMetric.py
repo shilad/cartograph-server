@@ -1,6 +1,6 @@
 import colour
 import palettable.colorbrewer.qualitative as q
-from cartograph.metrics.Utils import color_from_code
+from metrics.Utils import color_from_code
 
 
 class QualitativeMetric:

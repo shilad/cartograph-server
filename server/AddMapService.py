@@ -6,8 +6,8 @@ import pipes
 from ConfigParser import SafeConfigParser
 import falcon
 import pandas
-from cartograph.Utils import build_map
-from cartograph.server.Map import Map
+from utils.Utils_revised import build_map
+from server.Map import Map
 
 
 # TODO: move all these server-level configs into the meta config file

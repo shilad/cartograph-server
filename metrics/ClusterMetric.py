@@ -2,7 +2,7 @@ import colorsys
 
 import colour
 
-from cartograph import Config
+from Config_revise import Config
 
 
 class ClusterMetric:
@@ -24,10 +24,15 @@ class ClusterMetric:
         alpha = 0.7 ** depth
 
         c = point.get('clusterid')
-        if c and c in self.colors:
-            return self.colors[c] + (alpha,)
-        else:
-            return self.neutralColor + (alpha,)
+        import logging
+        logging.warning(str(c) + " iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+        return self.colors[str(c)] + (alpha,)
+
+        # important to switch back
+        # if c and c in self.colors:
+        #     return self.colors[c] + (alpha,)
+        # else:
+        #     return self.neutralColor + (alpha,)
 
     def adjustCountryColor(self, c, n):
         (r, g, b) = colour.Color(c).rgb

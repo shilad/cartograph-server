@@ -4,7 +4,7 @@ import re
 
 import falcon
 
-import Config
+import Config_revise
 from server.Map import Map
 
 

@@ -2,19 +2,19 @@
 dataset: dev_en
 experimentID: 0000
 baseDir: ./experiment/%(dataset)s/%(experimentID)s
-generatedDir: ../cartograph-alg/experiment/%(dataset)s/%(experimentID)s
+generatedDir: ./data/%(dataset)s/%(experimentID)s
 metricDir: %(baseDir)s/metrics
-geojsonDir: %(generatedDir)s/geojson
-externalDir: ../cartograph-alg/data/%(dataset)s
+geojsonDir: ./%(generatedDir)s
+externalDir: ./%(generatedDir)s
+webCacheDir: %(baseDir)s/webCache
 
 [ExternalFiles]
-names_with_id: %(externalDir)s/domain_concepts.csv
-
+names_with_id: %(externalDir)s/domain_concept.csv
 
 [GeneratedFiles]
-article_coordinates: %(generatedDir)s/xy_new_embeddings.csv
-zpop_with_id: %(generatedDir)s/zpop_with_id.csv
-clusters_with_id: %(generatedDir)s/clusters_with_id.csv
+article_coordinates: %(generatedDir)s/new_xy_embeddings.csv
+zpop_with_id: %(generatedDir)s/popularity_score.csv
+clusters_with_id: %(generatedDir)s/key_phrases_cluster_groups.csv
 
 [PreprocessingConstants]
 sample_borders: True
@@ -28,8 +28,8 @@ num_contours: 7
 min_border_noise_length: .01
 contour_bins: 200
 tsne_perplexity: 30
-label_weight = 0.2
-clust_weight = 0.25
+label_weight: 0.2
+clust_weight: 0.25
 
 [MapConstants]
 max_coordinate: 40
@@ -45,7 +45,7 @@ base_url: http://localhost:4000/%(dataset)s
 compress_png: true
 
 [MapData]
-countries_geojson: %(geojsonDir)s/countries.geojson
+countries_geojson: %(geojsonDir)s/countries_new_try.geojson
 
 [MapResources]
 img_dot: ./data/labdata/blackDot.png
@@ -57,8 +57,8 @@ map_file_centroid: ./map_centroid_%(dataset)s.xml
 img_src_name: %(mapDir)s/world
 
 [PG]
-host = localhost
-database = mapnik_%(dataset)s
+host: localhost
+database: mapnik_%(dataset)s
 user =
 password =
 
@@ -67,6 +67,3 @@ config: %(baseDir)s/tilestache_cfg.json
 cache: %(baseDir)s/tilestache_cache
 
 [Metrics]
-
-
-

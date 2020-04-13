@@ -1,6 +1,6 @@
-from cartograph.metrics.DivergingMetric import DivergingMetric
-from cartograph.metrics.SequentialMetric import SequentialMetric
-from cartograph.metrics.QualitativeMetric import QualitativeMetric
+from metrics.DivergingMetric import DivergingMetric
+from metrics.SequentialMetric import SequentialMetric
+from metrics.QualitativeMetric import QualitativeMetric
 
 
 def getMetric(js):

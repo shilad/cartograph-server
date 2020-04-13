@@ -4,7 +4,7 @@ import string
 import falcon
 import pandas
 from ConfigParser import SafeConfigParser
-from utils.Utils import build_map
+from utils.Utils_revised import build_map
 
 
 class AddMetricService:

@@ -32,7 +32,9 @@ class PolyLayer:
             raw = []
             props = []
             for row in rows:
+                import logging
                 props.append({ k : v for (k, v) in row.items() if k != 'geometry' })
+                logging.warning(props)
                 raw.append(row['geometry'].buffer(0))
             merged = shapely.geometry.GeometryCollection(raw)
             # simplified = list(merged)

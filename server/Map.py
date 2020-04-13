@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 
-import Config
+from Config_revise import Config
 
 from server.AddMetricService import AddMetricService
 from server.CountryService import CountryService
@@ -28,7 +28,7 @@ class Map:
         self.last_update = os.path.getmtime(conf_path)
         self._send_update = False
 
-        conf = Config.initConf(conf_path)
+        conf = Config(conf_path)
         self.name = conf.get('DEFAULT', 'dataset')
     
         # if os.getenv('CLEAR_CACHE'):
@@ -40,7 +40,7 @@ class Map:
     
         logging.info('initializing services for ' + self.name)
 
-        self.add_metric_service = AddMetricService(conf_path, self)
+        # self.add_metric_service = AddMetricService(conf_path, self)
         self.logging_service = LoggingService(conf)
         self.point_service = PointService(conf)
         self.country_service = CountryService(conf)

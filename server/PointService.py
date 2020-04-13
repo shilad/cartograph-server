@@ -7,10 +7,9 @@ from collections import defaultdict
 
 import shapely.geometry
 
-
 from metrics import getMetric
 from utils.PointIndex import PointIndex
-from utils.Utils import read_features
+from utils.Utils_revised import read_features
 from metrics.ClusterMetric import ClusterMetric
 from server.ServerUtils import tileExtent
 from server import RelatedPointsService
@@ -27,10 +26,18 @@ class PointService:
             config.get('GeneratedFiles', 'article_coordinates'),
             config.get('GeneratedFiles', 'zpop_with_id'),
             config.get('GeneratedFiles', 'clusters_with_id'),
-            config.get('ExternalFiles', 'names_with_id'),
-            required=('x', 'y', 'zpop', 'name', 'cluster')
+            config.get('ExternalFiles', 'names_with_id')
+            # required=('x', 'y', 'zpop', 'name', 'cluster')
         )
 
+        # logging.warning(self.points)
+        for k, v in self.points.items():
+            if 'x' not in v:
+                logging.warning(str(k) + "doesn't have x")
+            if 'y' not in v:
+                logging.warning(str(k) + "doesn't have y")
+            if 'name' not in v:
+                logging.warning(str(k) + "doesn't have name")
         for (id, point) in self.points.items():
             point['x'] = float(point['x'])
             point['y'] = float(point['y'])
@@ -41,7 +48,8 @@ class PointService:
 
         logger.info('building spatial index...')
         ids = sorted(self.points.keys())
-        pops = [-self.points[id]['zpop'] for id in ids]
+        # pops = [-self.points[id]['zpop'] for id in ids]
+        pops = [self.points[id]['zpop'] for id in ids]
         X = [self.points[id]['x'] for id in ids]
         Y = [self.points[id]['y'] for id in ids]
         self.index = PointIndex(ids, X, Y, pops)
@@ -104,6 +112,8 @@ class PointService:
             (r, g, b, a) = metric.getColor(p, z)
             def f(x): return int(255 * x)
             color = 'rgba(%d,%d,%d,%.3f)' % (f(r), f(g), f(b), a)
+            logging.warning("######################################3")
+            logging.warning(color)
             props = { 'id' : p['id'],
                       'zpop' : p['zpop'],
                       'color' : color,
@@ -114,15 +124,15 @@ class PointService:
             builder.addPoint('cities', p['name'],
                              shapely.geometry.Point(p['x'], p['y']), props)
 
-if __name__ == '__main__':
-    import Config
-
-    logging.basicConfig(stream=sys.stderr, level=logging.INFO)
-
-    Config.initConf('data/conf/simple.txt')
-    pd = PointService(Config.get())
-    for p in pd.getTilePoints(6, 26, 36, 10):
-        print p['id'], p['zpop']
+# if __name__ == '__main__':
+    # import Config_revise
+    #
+    # logging.basicConfig(stream=sys.stderr, level=logging.INFO)
+    #
+    # Config_revise.initConf('data/conf/simple.txt')
+    # pd = PointService(Config.get())
+    # for p in pd.getTilePoints(6, 26, 36, 10):
+    #     print p['id'], p['zpop']
     # for p in pd.getTilePoints(6, 27, 37, 1000):
     #     if p['id'] == '13616':
     #         print p['id']

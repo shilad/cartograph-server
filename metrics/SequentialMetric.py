@@ -2,7 +2,7 @@ import colour
 from collections import defaultdict
 import palettable.colorbrewer.sequential as sq
 
-from cartograph.metrics.Utils import color_from_code
+from metrics.Utils import color_from_code
 
 
 class SequentialMetric:

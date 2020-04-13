@@ -25,10 +25,10 @@ docker pull shilad/cartograph-base:latest || die "Docker pull failed."
 
 
 docker run \
-    -e PYTHONPATH=.:./cartograph/server \
+    -e PYTHONPATH=.:./server \
     -e CARTOGRAPH_CONFIGS="$conf" \
-    -v "$(pwd)":/cartograph \
-    -w /cartograph \
+    -v "$(pwd)":/cartograph-server \
+    -w /cartograph-server \
     -p 4000:4000 \
     shilad/cartograph-base:latest \
     gunicorn --workers 4 -b 0.0.0.0:4000 app2:app --reload
