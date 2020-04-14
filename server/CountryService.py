@@ -37,18 +37,27 @@ class CountryService:
             p.init()
 
     def addLayers(self, builder, z, x, y):
-        if z < self.maxZoom:
+        # logger.info(z)
+        # logger.info(self.maxZoom)
+
+        if z < 5:  # if z < self.maxZoom:
             return
 
-        (polys, points) = self.getPolys(z, x, y)
+        (polys, points, centers) = self.getPolys(z, x, y)
         for (layer, shp, props) in points:
             builder.addPoint(layer, props, shp)
         for (layer, shp, props) in polys:
             builder.addMultiPolygon(layer, shp, props)
+        for center in centers:
+            builder.addPoint('countries_labels', props['label'], center)
+
+
+
 
     def getPolys(self, z, x, y):
         polys = []
         points = []
+        centers = []
         (x0, y0, x1, y1) = tileExtent(z, x, y)
         assert (x0 <= x1)
         assert (y0 <= y1)
@@ -57,5 +66,9 @@ class CountryService:
         for poly in self.polys:
             for shp, props, center in poly.getPolysInBox(z, box):
                 polys.append((poly.name, shp, props))
-        return (polys, points)
+                if center is not None:
+                    centers.append(center)
+        logger.info(len(centers))
+        logger.info(centers)
+        return (polys, points, centers)
 

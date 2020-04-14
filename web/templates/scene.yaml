@@ -44,24 +44,24 @@ layers:
             raster:
                 order: 0 # draw on bottom
 #
-#    capitals:
-#        data: { source: vector, layer: countries_labels }
-#        draw:
-#          points:
-#            color: '#dd9999'
-#            size: 0px
-#            collide: false
-#            text:
-#              text_source: name
-#              anchor: center
-#              collide: false
-#              font:
-#                  family: Arial
-#                  size: 16px
-#                  weight: 700
-#                  transform: uppercase
-#                  fill: 'rgba(255, 255, 255, 0.5)'
-#                  stroke: { color: '#666', width: 1px }
+    capitals:
+      data: { source: vector, layer: countries_labels }
+      draw:
+        points:
+          color: '#dd9999'
+          size: 0px
+          #            collide: true
+          text:
+            text_source: name
+            anchor: center
+            collide: false
+            font:
+              family: Arial
+              size: 30px
+              weight: 700
+              transform: uppercase
+              fill: '#30bff2'
+              stroke: { color: '#f0f3f5', width: 2px }
     cities:
         data: { source: vector, layer: cities }
         small_cities:

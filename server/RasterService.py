@@ -140,7 +140,7 @@ class RasterService:
 
 
     def _renderBackground(self, metric, z, x, y):
-        (polys, points) = self.countryService.getPolys(z, x, y)
+        (polys, points, centers) = self.countryService.getPolys(z, x, y)
         clusterIds = set()
         polysByName = {}
         for pinfo in polys:
