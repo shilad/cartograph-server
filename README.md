@@ -18,7 +18,7 @@ If you want to delete the webCache, it is located in:
 ./cartograph-server/experiment/food/0004/webCache
 ```
 
-#Problem Description:
+# Problem Description:
 
 The part of code to add labels is located in ```CountryService.py``` lines 39-50, in the function ```addLayers``` . My understanding of this 
 function is that, if the zoom level is smaller than a threshold, we don't add country labels. Otherwise, only when we zoom in enough, 
