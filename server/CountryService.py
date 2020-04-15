@@ -37,19 +37,22 @@ class CountryService:
             p.init()
 
     def addLayers(self, builder, z, x, y):
+        (polys, points) = self.getPolys(z, x, y)
+        for (layer, shp, props, center) in polys:
+            if center is not None:
+                builder.addPoint('countries_labels', props['label'], center)
+
         # logger.info(z)
         # logger.info(self.maxZoom)
 
         if z < 5:  # if z < self.maxZoom:
             return
 
-        (polys, points, centers) = self.getPolys(z, x, y)
+        assert len(polys) == len(centers)
         for (layer, shp, props) in points:
             builder.addPoint(layer, props, shp)
         for (layer, shp, props) in polys:
             builder.addMultiPolygon(layer, shp, props)
-        for center in centers:
-            builder.addPoint('countries_labels', props['label'], center)
 
 
 
@@ -57,7 +60,6 @@ class CountryService:
     def getPolys(self, z, x, y):
         polys = []
         points = []
-        centers = []
         (x0, y0, x1, y1) = tileExtent(z, x, y)
         assert (x0 <= x1)
         assert (y0 <= y1)
@@ -65,10 +67,8 @@ class CountryService:
         box = shapely.geometry.box(x0 - delta, y0 - delta, x1 + delta, y1 + delta)
         for poly in self.polys:
             for shp, props, center in poly.getPolysInBox(z, box):
-                polys.append((poly.name, shp, props))
-                if center is not None:
-                    centers.append(center)
-        logger.info(len(centers))
-        logger.info(centers)
-        return (polys, points, centers)
+                polys.append((poly.name, shp, props, center))
+        # logger.info(len(centers))
+        # logger.info(centers)
+        return (polys, points)
 
