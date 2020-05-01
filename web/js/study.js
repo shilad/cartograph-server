@@ -1,18 +1,6 @@
-$('.task input').on("change", function() {
-    let selected = $('input[name=cluster]:checked', '.task').val();
-
-    if(selected === "other") {
-        $("#label6").show();
-        $("#label6").keyup(function() {
-            let customLabel = $("#label6").val();
-            $("#other").val(customLabel)
-        });
-    } else {
-        $("#label6").hide();
-    }
-})
-
-
+// This script renders the radio checkboxes in the user study and
+// handles the navigational workflow
+// Author: Rock Pang
 
 function Study(parentContainer) {
     this.parentContainer = parentContainer;
@@ -20,19 +8,11 @@ function Study(parentContainer) {
     this.currentIndex = 0;
     this.url = "";
 
-    var constraints = {
-        task1 : {
-            cluster : { required: true }
-        },
-        task2 : {
-            cluster : { presence: true }
-        }
-    };
-
     this.tasks.push($('#surveyQuestions1'));
     this.tasks.push($('#surveyQuestions2'));
     this.tasks.push($('#surveyQuestions3'));
     this.tasks.push($('#thankYou'));
+    /// need to incorporate file reading
 
     for(var i = 0; i < this.tasks.length; i++) {
         if(i == this.currentIndex) {
@@ -44,34 +24,31 @@ function Study(parentContainer) {
 
     this.next = function() {
         let currTask = $(this.tasks[this.currentIndex]);
-        let currForm = currTask.find("form")[0];
-        let values = validate.collectFormValues(currForm);
-        this.url += '&cluster' + this.currentIndex + '=' + values['cluster'];
-        // alert(currForm.id);
-        // var result = validate(values, constraints[currForm.id]);
-        // alert(result);
-        // let errorP = $(currForm).find("p.error");
-        //
-        // if (result) {
-        //     var errorMsgs = [];
-		// 	for (var k in result) {
-		// 		if (result[k].length) {
-		// 			errorMsgs.push(htmlEncode(result[k][0]));
-		// 		}
-		// 	}
-		// 	errorP.html(errorMsgs.join('<br/>')).fadeIn(500);
-		// 	return this;
-        // }
-        //
-        // errorP.text('').hide();
+        let currForm = currTask.find("form");
+        let values = getValues(currForm);
 
-        // CG.log({ event : 'study', 'formid' : csurrForm.id, values : values, index : this.currentIndex });
+        // validate the form
+		let errorP = $(currForm).find(".error");
+		alert(errorP.attr("class"));
+		alert($(currForm).find(":checked").length);
+		if($(currForm).find(":checked").length < 10) {
+			errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
+			return this;
+		}
+		errorP.text('').hide();
 
+		// Generate url and logging
+		for(var label_key in values) {
+			this.url += "&" + label_key + "=" + values[label_key];
+		}
+        CG.log({ event : 'study', 'formid' : currForm.id, values : values, index : this.currentIndex });
+
+        // Transition to the next form
         var nextTask = (this.currentIndex < this.tasks.length-1)
 			? $(this.tasks[this.currentIndex + 1])
 			: null;
 
-        alert(this.url)
+        alert(this.url);
 
 		currTask.fadeOut(200, function () {
 			if (nextTask) nextTask.fadeIn(100);
@@ -87,6 +64,15 @@ function Study(parentContainer) {
 		e.preventDefault();
 		thisSurvey.next();
 	});
+}
+
+function getValues(form) {
+	var values = {};
+	$.each(form.serializeArray(), function(i, field) {
+		values[field.name] = field.value;
+	})
+	alert(values['label1']);
+	return values;
 }
 
 function htmlEncode(value){
@@ -110,7 +96,55 @@ function showCartoDemo() {
 		.start();
 }
 
+function showSurveyQuestions() {
+	var dic = { 1 : ["Hi", "a", "b", "c", "d", "e", "f", "g", "h", "i"],
+		2 : ["Hi", "az", "bz", "cz", "d", "e", "f", "g", "h", "i"],
+		3 : ["malayian states", "food and drinks", "Chinese states", "Korean Barbecue", "Japanese Sushi", "Indonesia Seafood",
+			"Vietnamese Pho", "Nepalese Food", "Taiwanese Desert", "Indian Curry"]
+	};
+	let ratings = ["Very Bad", "Bad", "Somewhat Bad", "Neutral", "Somewhat Good", "Good", "Very Good"];
+
+	for(var i = 1; i <= Object.keys(dic).length; i++) {
+		 let country = $('#country' + i);
+		 var htmlStr = "<label class='likertStatement'>Potential Labels for Country " + i + "</label>" +
+			 "<div class='container'>";
+
+		 var labels = dic[i];
+		 for (var j = 0; j < labels.length; j++) {
+			 var labelhtmlStr =
+				 "<div class='row'>" +
+					"<div class='col-2'>" + dic[i][j] + "</div>" +
+					"<div class='col-10'>" +
+						"<ul class='likert'>";
+
+			 for (var k = 0; k < 7; k++) {
+				 labelhtmlStr += " " + // necessary
+					 "<li>" +
+						 "<input type='radio' name='label" + j + "' value='" + ratings[k] + "'>" +
+						 "<label>" + ratings[k] + "</label>" +
+					 "</li>"
+			 }
+
+			 labelhtmlStr += "</ul></div></div>";
+			 htmlStr += labelhtmlStr;
+		 }
+		 htmlStr += "<div class='row'>" +
+			 			"<div class='col-2'>" +
+			 				"<input data-action=\"next\" type='submit' name='submit' value='Submit'/>" +
+			 			"</div>" +
+			 			"<div class='col-10'>" +
+			 				"<p class=\"error\">&nbsp;</p>" +
+			 			"</div>" +
+			 		"</div>";
+
+		 htmlStr += "</div>";
+		 country.append(htmlStr);
+	 }
+}
+
 $(document).ready(function() {
+	showSurveyQuestions();
+
 	$('#startStudyButton').click(function() {
 		$('body').chardinJs('start'); // Show the directions
 		$('#introContainer').hide();
