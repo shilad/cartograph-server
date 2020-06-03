@@ -29,15 +29,13 @@ function Study(parentContainer) {
 
         // validate the form
 		let errorP = $(currForm).find(".error");
-		alert(errorP.attr("class"));
-		alert($(currForm).find(":checked").length);
 		if($(currForm).find(":checked").length < 10) {
 			errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
 			return this;
 		}
 		errorP.text('').hide();
 
-		// Generate url and logging
+		// Generate url and logging  TODO: Remove URL
 		for(var label_key in values) {
 			this.url += "&" + label_key + "=" + values[label_key];
 		}
@@ -96,39 +94,103 @@ function showCartoDemo() {
 		.start();
 }
 
-function showSurveyQuestions() {
-	var dic = { 1 : ["Hi", "a", "b", "c", "d", "e", "f", "g", "h", "i"],
-		2 : ["Hi", "az", "bz", "cz", "d", "e", "f", "g", "h", "i"],
-		3 : ["malayian states", "food and drinks", "Chinese states", "Korean Barbecue", "Japanese Sushi", "Indonesia Seafood",
-			"Vietnamese Pho", "Nepalese Food", "Taiwanese Desert", "Indian Curry"]
-	};
-	let ratings = ["Very Bad", "Bad", "Somewhat Bad", "Neutral", "Somewhat Good", "Good", "Very Good"];
+function process(response) {
+	var dic = {};
+	var allRows = response.split(/\r?\n|\r/);
+	for(var singleRow = 0; singleRow < allRows.length; singleRow++) {
+		var rowCells = allRows[singleRow].split(',');
+		var country = rowCells[1];
+		var label = rowCells[2];
+		if(!(country in dic)) {
+			dic[country] = [];
+		}
+		dic[country].push(label);
+	}
+	return dic;
+}
+
+function shuffleDic(dic) {
+	var newDic = {}
+	for(var country in dic) {
+		var label_arr = dic[country];
+		var curr_index = label_arr.length, temp_value, rand_index;
+		while(0 != curr_index) {
+			rand_index = Math.floor(Math.random() * curr_index);
+			curr_index -= 1;
+
+			temp_value = label_arr[curr_index];
+			label_arr[curr_index] = label_arr[rand_index];
+			label_arr[rand_index] = temp_value;
+		}
+		newDic[country] = label_arr;
+	}
+	return newDic;
+}
+
+function readFromCSV() {
+	$.ajax({
+		type: "GET",
+		url: "./food-candidate-labels.csv",
+		dataType: "text",
+		success: function (response) {
+			var dic = {};
+			var allRows = response.split(/\r?\n|\r/);
+			for(var singleRow = 0; singleRow < allRows.length; singleRow++) {
+				var rowCells = allRows[singleRow].split(',');
+				var country = rowCells[1];
+				var label = rowCells[2];
+				if(!(country in dic)) {
+					dic[country] = [];
+				}
+				dic[country].push(label);
+			}
+			var shuffledDic = shuffleDic(dic);
+			showSurveyQuestions(shuffledDic);
+		}
+	});
+}
+
+function showSurveyQuestions(dic) {
+	//TODO: avoid caching
+	// var dic = { 3 : ["Hi", "a", "b", "c", "d", "e", "f", "g", "h", "i"],
+	// 	2 : ["Hi", "az", "bz", "cz", "d", "e", "f", "g", "h", "i"],
+	// 	1 : ["malayian states", "food and drinks", "Chinese states", "Korean Barbecue", "Japanese Sushi", "Indonesia Seafood",
+	// 		"Vietnamese Pho", "Nepalese Food", "Taiwanese Desert", "Indian Curry"]
+	// };
+	// var dic = readFromCSV(directory)
+	//
+	// var dic = readFromCSV();
+	let ratings = ["Very Bad", "Bad", "Neutral", "Good", "Very Good"];
 
 	for(var i = 1; i <= Object.keys(dic).length; i++) {
-		 let country = $('#country' + i);
-		 var htmlStr = "<label class='likertStatement'>Potential Labels for Country " + i + "</label>" +
-			 "<div class='container'>";
+		let country = $('#country' + i);
+		let htmlStr = "<label class='likertStatement'>Potential Labels for Country " + i + "</label>" +
+			 "<div class='container' style='overflow-y: visible;'>" +
+				"<div class='row'>" +
+					"<div class='col-2'></div>" + " " +
+					"<div class='col text-center'>Very Bad</div>" + " " +
+					"<div class='col text-center'>Bad</div>" + " " +
+					"<div class='col text-center'>Neutral</div>" + " " +
+					"<div class='col text-center'>Good</div>" + " " +
+					"<div class='col text-center'>Very Good</div>" +
+				"</div>";
 
-		 var labels = dic[i];
-		 for (var j = 0; j < labels.length; j++) {
-			 var labelhtmlStr =
-				 "<div class='row'>" +
-					"<div class='col-2'>" + dic[i][j] + "</div>" +
-					"<div class='col-10'>" +
-						"<ul class='likert'>";
+		let labels = dic[i];
+		for(var j = 0; j < labels.length; j++) {
+			let labelhtmlStr =
+				"<div class='row'>" +
+					"<div class='col-2'>" + dic[i][j] + "</div>";
+			for(var k = 0; k < ratings.length; k++) {
+				labelhtmlStr += " " +
+					"<div class='col'>" +
+						"<input type='radio' name='label" + j + "' value='" + ratings[k] + "'>" +
+					"</div>"
+			}
+			labelhtmlStr += "</div> <hr>";
+			htmlStr += labelhtmlStr;
+		}
 
-			 for (var k = 0; k < 7; k++) {
-				 labelhtmlStr += " " + // necessary
-					 "<li>" +
-						 "<input type='radio' name='label" + j + "' value='" + ratings[k] + "'>" +
-						 "<label>" + ratings[k] + "</label>" +
-					 "</li>"
-			 }
-
-			 labelhtmlStr += "</ul></div></div>";
-			 htmlStr += labelhtmlStr;
-		 }
-		 htmlStr += "<div class='row'>" +
+		htmlStr += "<div class='row'>" +
 			 			"<div class='col-2'>" +
 			 				"<input data-action=\"next\" type='submit' name='submit' value='Submit'/>" +
 			 			"</div>" +
@@ -136,14 +198,13 @@ function showSurveyQuestions() {
 			 				"<p class=\"error\">&nbsp;</p>" +
 			 			"</div>" +
 			 		"</div>";
-
-		 htmlStr += "</div>";
-		 country.append(htmlStr);
-	 }
+		htmlStr += "</div>";
+		country.append(htmlStr);
+	}
 }
 
 $(document).ready(function() {
-	showSurveyQuestions();
+	readFromCSV();
 
 	$('#startStudyButton').click(function() {
 		$('body').chardinJs('start'); // Show the directions
