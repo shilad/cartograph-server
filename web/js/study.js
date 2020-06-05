@@ -2,6 +2,8 @@
 // handles the navigational workflow
 // Author: Rock Pang
 
+
+
 function Study(parentContainer) {
     this.parentContainer = parentContainer;
     this.tasks = parentContainer.find('.task');
@@ -160,7 +162,8 @@ function showSurveyQuestions(dic) {
 	// var dic = readFromCSV(directory)
 	//
 	// var dic = readFromCSV();
-	let ratings = ["Very Bad", "Bad", "Neutral", "Good", "Very Good"];
+//	let ratings = ["Very Bad", "Bad", "Neutral", "Good", "Very Good"];
+	let ratings = ["Very Bad", "Neutral", "Very Good"];
 
 	for(var i = 1; i <= Object.keys(dic).length; i++) {
 		let country = $('#country' + i);
@@ -169,24 +172,29 @@ function showSurveyQuestions(dic) {
 				"<div class='row'>" +
 					"<div class='col-2'></div>" + " " +
 					"<div class='col text-center'>Very Bad</div>" + " " +
-					"<div class='col text-center'>Bad</div>" + " " +
+//					"<div class='col text-center'>Bad</div>" + " " +
 					"<div class='col text-center'>Neutral</div>" + " " +
-					"<div class='col text-center'>Good</div>" + " " +
+//					"<div class='col text-center'>Good</div>" + " " +
 					"<div class='col text-center'>Very Good</div>" +
 				"</div>";
 
 		let labels = dic[i];
 		for(var j = 0; j < labels.length; j++) {
 			let labelhtmlStr =
-				"<div class='row'>" +
-					"<div class='col-2'>" + dic[i][j] + "</div>";
+			"<div class='mydiv'>" +
+				"<div class='row h-100'>" +
+					"<div class='col'>" + dic[i][j] + "</div>";
 			for(var k = 0; k < ratings.length; k++) {
 				labelhtmlStr += " " +
-					"<div class='col'>" +
+					"<div class='col' >" +
 						"<input type='radio' name='label" + j + "' value='" + ratings[k] + "'>" +
 					"</div>"
 			}
-			labelhtmlStr += "</div> <hr>";
+
+			labelhtmlStr += "</div>"
+			labelhtmlStr += "</div> <hr>" ;
+//			labelhtmlStr += "<div class='w-100'> </div>"
+
 			htmlStr += labelhtmlStr;
 		}
 
@@ -200,6 +208,7 @@ function showSurveyQuestions(dic) {
 			 		"</div>";
 		htmlStr += "</div>";
 		country.append(htmlStr);
+
 	}
 }
 
