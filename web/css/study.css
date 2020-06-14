@@ -1,2 +1,17 @@
 .mydiv div:hover{background-color:rgba(240, 218, 53, 0.3); }
 
+.table tbody tr:hover {
+    background-color: #bcbcbc;
+}
+
+.table tbody tr .table-danger:hover {
+    background-color: #b9534f;
+}
+
+.table tbody tr .table-warning:hover {
+    background-color: #f0ad4e;
+}
+
+.table tbody tr .table-success:hover {
+    background-color: #5cb85c;
+}

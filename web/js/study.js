@@ -164,46 +164,40 @@ function showSurveyQuestions(dic) {
 	// var dic = readFromCSV();
 //	let ratings = ["Very Bad", "Bad", "Neutral", "Good", "Very Good"];
 	let ratings = ["Very Bad", "Neutral", "Very Good"];
+	let colors = ['table-danger', 'table-warning', 'table-success'];
 
 	for(var i = 1; i <= Object.keys(dic).length; i++) {
 		let country = $('#country' + i);
 		let htmlStr =
-		"<table>" + "<tr>" +
-      "<td><div1><h6 style='text-align:left'>Potential Labels for Country " + i + ", colored: " + "</h6></div></td>" +
-      "<td><div2> " + "<div style='width:10px;height:20px;border:0px solid #000; '></div></div>" +  "</div> </td>" +
-      "<td><div3><div style='width:30px;height:20px;border:1px solid #000; background-color:#00FFFF'></div></div> </td>" +
-   "</tr> </table>" +
-			 "<div class='container' style='overflow-y: visible;'>" +
-				"<div class='row'>" +
-					"<div class='col-2'></div>" + " " +
-					"<div class='col text-center'>Very Bad</div>" + " " +
-//					"<div class='col text-center'>Bad</div>" + " " +
-					"<div class='col text-center'>Neutral</div>" + " " +
-//					"<div class='col text-center'>Good</div>" + " " +
-					"<div class='col text-center'>Very Good</div>" +
-				"</div>" ;
+			"<h6>Potential Labels for Country " + i + "</h6>" +
+			"<table class='table'>" +
+				"<thead>" +
+					"<tr>" +
+						"<th scope='col'></th>" +
+						"<th scope='col' style='width: 15%'>Very Bad</th>" +
+						"<th scope='col' style='width: 15%'>Neutral</th>" +
+						"<th scope='col' style='width: 15%'>Very Good</th>" +
+					"</tr>" +
+				"</thead>" +
+				"<tbody>";
 
 		let labels = dic[i];
-//		let labelhtmlStr = "<hr>";
 		for(var j = 0; j < labels.length; j++) {
-			let labelhtmlStr = "<hr>";
-			labelhtmlStr += "<div class='mydiv'>" +
-				"<div class='row h-100'>" +
-					"<div class='col text-center'>" + dic[i][j] + "</div>";
+			let labelhtmlStr =
+					"<tr>" +
+						"<th scope='row' style='pointer-events:none;'>"  + dic[i][j] + "</th>";
+
 			for(var k = 0; k < ratings.length; k++) {
 				labelhtmlStr += " " +
-					"<div class='col' >" +
+					"<td class='"+ colors[k] +" text-center'>" +
 						"<input type='radio' name='label" + j + "' value='" + ratings[k] + "'>" +
-					"</div>"
+					"</td>";
 			}
 
-			labelhtmlStr += "</div>"
-			labelhtmlStr += "</div>" ;
-//			labelhtmlStr += "<div class='w-100'> </div>"
-
+			labelhtmlStr += "</tr>";
 			htmlStr += labelhtmlStr;
 		}
-		htmlStr+="<hr>";
+		htmlStr += "</tbody></table>";
 		htmlStr+= "<p> <label class='taskLabel' for='task2Text'><strong><span></span> Additional missing labels? </label> <textarea name='feedback' id='task2Text' cols='30' rows='2' required></textarea></p>"
 
 		htmlStr += "<div class='row'>" +
