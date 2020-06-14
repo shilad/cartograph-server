@@ -1,6 +1,5 @@
 import os
 import logging
-import distutils.core
 
 logger = logging.getLogger('cartograph.config')
 

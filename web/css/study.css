@@ -15,3 +15,7 @@
 .table tbody tr .table-success:hover {
     background-color: #5cb85c;
 }
+
+input[type='radio'] {
+    transform: scale(1.5);
+}

@@ -152,6 +152,13 @@ function readFromCSV() {
 	});
 }
 
+function adjustColor(color) {
+	// takes in a raw color string eg "#ffffff"
+	// ClusterMetric adjustCountryColor
+	// return new hsvtorgb
+}
+
+
 function showSurveyQuestions(dic) {
 	//TODO: avoid caching
 	// var dic = { 3 : ["Hi", "a", "b", "c", "d", "e", "f", "g", "h", "i"],
@@ -165,11 +172,17 @@ function showSurveyQuestions(dic) {
 //	let ratings = ["Very Bad", "Bad", "Neutral", "Good", "Very Good"];
 	let ratings = ["Very Bad", "Neutral", "Very Good"];
 	let colors = ['table-danger', 'table-warning', 'table-success'];
+	let countryColors = ['#e9e1be', '#ddcdd3', '#d8e5bf', '#fcb2b2', '#a997ca', '#f7d583',
+						'#76abea', '#f0cab2', '#b6e7e0', '#f5b2cc', '#bccfb9'];
 
 	for(var i = 1; i <= Object.keys(dic).length; i++) {
 		let country = $('#country' + i);
 		let htmlStr =
-			"<h6>Potential Labels for Country " + i + "</h6>" +
+			"<div class='container' style='display: flex; justify-content: space-around'>" +
+				"<div><h6>Potential Labels for Country " + i + "</h6></div>" +
+				"<div class='card' style=\"width:30px; height: 20px; background-color: " + adjustColor(countryColors[i-1]) + "\"></div>" +
+			"</div>" +
+
 			"<table class='table'>" +
 				"<thead>" +
 					"<tr>" +
