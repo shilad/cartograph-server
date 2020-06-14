@@ -167,7 +167,12 @@ function showSurveyQuestions(dic) {
 
 	for(var i = 1; i <= Object.keys(dic).length; i++) {
 		let country = $('#country' + i);
-		let htmlStr = "<label class='likertStatement'>Potential Labels for Country " + i + "</label>" +
+		let htmlStr =
+		"<table>" + "<tr>" +
+      "<td><div1><h6 style='text-align:left'>Potential Labels for Country " + i + ", colored: " + "</h6></div></td>" +
+      "<td><div2> " + "<div style='width:10px;height:20px;border:0px solid #000; '></div></div>" +  "</div> </td>" +
+      "<td><div3><div style='width:30px;height:20px;border:1px solid #000; background-color:#00FFFF'></div></div> </td>" +
+   "</tr> </table>" +
 			 "<div class='container' style='overflow-y: visible;'>" +
 				"<div class='row'>" +
 					"<div class='col-2'></div>" + " " +
@@ -176,14 +181,15 @@ function showSurveyQuestions(dic) {
 					"<div class='col text-center'>Neutral</div>" + " " +
 //					"<div class='col text-center'>Good</div>" + " " +
 					"<div class='col text-center'>Very Good</div>" +
-				"</div>";
+				"</div>" ;
 
 		let labels = dic[i];
+//		let labelhtmlStr = "<hr>";
 		for(var j = 0; j < labels.length; j++) {
-			let labelhtmlStr =
-			"<div class='mydiv'>" +
+			let labelhtmlStr = "<hr>";
+			labelhtmlStr += "<div class='mydiv'>" +
 				"<div class='row h-100'>" +
-					"<div class='col'>" + dic[i][j] + "</div>";
+					"<div class='col text-center'>" + dic[i][j] + "</div>";
 			for(var k = 0; k < ratings.length; k++) {
 				labelhtmlStr += " " +
 					"<div class='col' >" +
@@ -192,11 +198,13 @@ function showSurveyQuestions(dic) {
 			}
 
 			labelhtmlStr += "</div>"
-			labelhtmlStr += "</div> <hr>" ;
+			labelhtmlStr += "</div>" ;
 //			labelhtmlStr += "<div class='w-100'> </div>"
 
 			htmlStr += labelhtmlStr;
 		}
+		htmlStr+="<hr>";
+		htmlStr+= "<p> <label class='taskLabel' for='task2Text'><strong><span></span> Additional missing labels? </label> <textarea name='feedback' id='task2Text' cols='30' rows='2' required></textarea></p>"
 
 		htmlStr += "<div class='row'>" +
 			 			"<div class='col-2'>" +
