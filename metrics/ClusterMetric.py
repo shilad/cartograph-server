@@ -2,7 +2,7 @@ import colorsys
 
 import colour
 
-from Config_revise import Config
+from Config import Config
 
 
 class ClusterMetric:

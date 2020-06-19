@@ -1,8 +1,10 @@
 import json
 
+import logging
 import shapely.geometry
 import shapely.wkb
 
+logger = logging.getLogger('cartograph.polylayer')
 
 class PolyLayer:
     def __init__(self, name, path=None, fields=None, simplification=None, labelField=None):
@@ -21,7 +23,9 @@ class PolyLayer:
         rows = []
         for geomJS in js['features']:
             r = {}
+            logger.warning(geomJS['geometry'])
             r['geometry'] = shapely.geometry.shape(geomJS['geometry'])
+
             r.update(geomJS.get('properties', {}))
             rows.append(r)
 
