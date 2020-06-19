@@ -2,50 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="714b7343-dbee-4878-b52f-1be8f5ac9dc7" name="Default Changelist" comment="added highlighting for hovering over text for study.html">
-      <change afterPath="$PROJECT_DIR$/data/food/0005/countries_new_try.geojson" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/food/0011/domain_concept.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/food/0011/popularity_score.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config_revise.py" beforeDir="false" afterPath="$PROJECT_DIR$/Config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/boundary.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/boundary.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/countries_new_try.geojson" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/countries_new_try_new.geojson" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/countries_new_try_new.geojson" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/domain.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/domain.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/domain_concept.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/domain_concept.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/elevation.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/elevation.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/final_labels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/final_labels.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/generate_joint_cluster.sh" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/generate_joint_cluster.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/graph.svg" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/graph.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/h_cat_cluster_groups.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/h_cat_cluster_groups.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/h_cat_top_labels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/h_cat_top_labels.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/key_phrases_cluster_groups.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/key_phrases_cluster_groups.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/key_phrases_top_labels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/key_phrases_top_labels.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/key_words_cluster_groups.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/key_words_cluster_groups.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/key_words_top_labels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/key_words_top_labels.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/lda_cluster_groups.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/lda_cluster_groups.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/lda_top_labels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/lda_top_labels.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/links_cluster_groups.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/links_cluster_groups.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/links_top_labels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/links_top_labels.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/new_xy_embeddings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/new_xy_embeddings.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/orig_cluster_groups.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/orig_cluster_groups.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/original_xy_embeddings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/original_xy_embeddings.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/params.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/params.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/popularity_score.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/popularity_score.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/predicted_borda.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/predicted_borda.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/food/0004/vanilla_vectors.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/food/0005/vanilla_vectors.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/defaultconfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/defaultconfig.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/ClusterMetric.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/ClusterMetric.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/AddMapService.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/AddMapService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/AddMetricService.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/AddMetricService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/ConfigService.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/ConfigService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/Map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/ParentService.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/ParentService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/PointService.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/PointService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/PolyLayer.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/PolyLayer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/RasterService.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/RasterService.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/Utils_revised.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data/food" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -88,18 +48,18 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/food" />
+      <recent name="$PROJECT_DIR$/data/education" />
+      <recent name="$PROJECT_DIR$/data/food/0004" />
+      <recent name="$PROJECT_DIR$/data/food/0004/logs" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/food" />
       <recent name="$PROJECT_DIR$/data/food/0015" />
       <recent name="$PROJECT_DIR$/data/food/0004" />
       <recent name="$PROJECT_DIR$/data/food/0014" />
       <recent name="$PROJECT_DIR$/experiment/food" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data/food" />
-      <recent name="$PROJECT_DIR$/data/education" />
-      <recent name="$PROJECT_DIR$/data/food/0004" />
-      <recent name="$PROJECT_DIR$/data/food/0004/logs" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -118,7 +78,7 @@
       <workItem from="1592452028763" duration="4256000" />
       <workItem from="1592459783941" duration="3913000" />
       <workItem from="1592534696924" duration="857000" />
-      <workItem from="1592576824355" duration="1968000" />
+      <workItem from="1592576824355" duration="3208000" />
     </task>
     <task id="LOCAL-00001" summary="added highlighting for hovering over text for study.html">
       <created>1591331955523</created>
@@ -171,10 +131,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="184" y="234" width="732" height="637" key="#Inspections/67.27.1853.1053@67.27.1853.1053" timestamp="1592104798145" />
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1592280333166">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1592580158148">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1592280333166" />
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1592580158148" />
     <state x="278" y="306" width="663" height="522" key="find.popup" timestamp="1592577523906">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

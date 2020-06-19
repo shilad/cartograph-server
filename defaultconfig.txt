@@ -44,7 +44,7 @@ base_url: http://localhost:4000/%(dataset)s
 compress_png: true
 
 [MapData]
-countries_geojson: %(geojsonDir)s/countries_why.geojson
+countries_geojson: %(geojsonDir)s/countries.geojson
 
 [MapResources]
 img_dot: ./data/labdata/blackDot.png
