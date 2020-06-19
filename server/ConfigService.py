@@ -2,7 +2,7 @@ import json
 
 import falcon
 
-from Config_revise import Config
+from Config import Config
 
 
 class ConfigService:

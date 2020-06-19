@@ -19,7 +19,7 @@ import time
 import sys
 
 
-from Config_revise import Config
+from Config import Config
 
 from math import pi, cos, sin, log, exp, atan
 

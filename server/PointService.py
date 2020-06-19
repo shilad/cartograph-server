@@ -9,7 +9,7 @@ import shapely.geometry
 
 from metrics import getMetric
 from utils.PointIndex import PointIndex
-from utils.Utils_revised import read_features
+from utils.Utils import read_features
 from metrics.ClusterMetric import ClusterMetric
 from server.ServerUtils import tileExtent
 from server import RelatedPointsService
@@ -125,7 +125,6 @@ class PointService:
                              shapely.geometry.Point(p['x'], p['y']), props)
 
 # if __name__ == '__main__':
-    # import Config_revise
     #
     # logging.basicConfig(stream=sys.stderr, level=logging.INFO)
     #

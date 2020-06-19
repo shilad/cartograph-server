@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 
-from Config_revise import Config
+from Config import Config
 
 from server.AddMetricService import AddMetricService
 from server.CountryService import CountryService

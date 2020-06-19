@@ -1,6 +1,8 @@
 [DEFAULT]
 dataset: food
 experimentID: 0004
+baseDir: ./experiment/%(dataset)s/%(experimentID)s
+generatedDir: ./data/%(dataset)s/%(experimentID)s
 
 [PreprocessingConstants]
 sample_size: 50000

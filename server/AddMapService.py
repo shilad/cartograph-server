@@ -6,7 +6,7 @@ import pipes
 from ConfigParser import SafeConfigParser
 import falcon
 import pandas
-from utils.Utils_revised import build_map
+from utils.Utils import build_map
 from server.Map import Map
 
 
