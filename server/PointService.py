@@ -31,6 +31,7 @@ class PointService:
         )
 
         # logging.warning(self.points)
+        print(self.points)
         for k, v in self.points.items():
             if 'x' not in v:
                 logging.warning(str(k) + "doesn't have x")
@@ -48,8 +49,7 @@ class PointService:
 
         logger.info('building spatial index...')
         ids = sorted(self.points.keys())
-        # pops = [-self.points[id]['zpop'] for id in ids]
-        pops = [self.points[id]['zpop'] for id in ids]
+        pops = [-self.points[id]['zpop'] for id in ids]
         X = [self.points[id]['x'] for id in ids]
         Y = [self.points[id]['y'] for id in ids]
         self.index = PointIndex(ids, X, Y, pops)
