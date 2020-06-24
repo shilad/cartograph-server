@@ -13,7 +13,7 @@ names_with_id: %(externalDir)s/domain_concept.csv
 
 [GeneratedFiles]
 article_coordinates: %(generatedDir)s/new_xy_embeddings.csv
-zpop_with_id: %(generatedDir)s/popularity_score.csv
+zpop_with_id: %(generatedDir)s/zpop_score.csv
 clusters_with_id: %(generatedDir)s/key_phrases_cluster_groups.csv
 [PreprocessingConstants]
 sample_borders: True

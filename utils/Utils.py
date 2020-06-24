@@ -22,10 +22,10 @@ def read_features(*files):
         # point_dic[article_id]['coords'] = np.array([float(row.x), float(row.y)])
 
     # read zpop_with_id
-    # zpop_with_id_df = pd.read_csv(files[1])
-    # for row in zpop_with_id_df.itertuples():
-    #     article_id = row.article_id
-    #     point_dic[article_id]['zpop'] = 0.01
+    zpop_with_id_df = pd.read_csv(files[1])
+    for row in zpop_with_id_df.itertuples():
+        article_id = row.article_id
+        point_dic[article_id]['zpop'] = row.zpop
 
     # read cluster_with_id
     cluster_with_id_df = pd.read_csv(files[2])
@@ -39,9 +39,6 @@ def read_features(*files):
         article_id = row.article_id
         if article_id in point_dic:
             point_dic[article_id]['name'] = row.article_name
-
-    for k, v in point_dic.items():
-        v['zpop'] = 0.1
 
     return point_dic
 
