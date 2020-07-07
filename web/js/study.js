@@ -2,8 +2,6 @@
 // handles the navigational workflow
 // Author: Rock Pang
 
-
-
 function Study(parentContainer) {
     this.parentContainer = parentContainer;
     this.tasks = parentContainer.find('.task');
@@ -180,7 +178,7 @@ function showSurveyQuestions(dic) {
 		let htmlStr =
 			"<div class='container' style='display: flex; justify-content: space-around'>" +
 				"<div><h6>Potential Labels for Country " + i + ", colored: </h6></div>" +
-				"<div class='card' style=\"width:30px; height: 20px; background-color: " + adjustColor(countryColors[i-1]) + "\"></div>" +
+				"<div class='card' style=\"width:30px; height: 20px; background-color: " + countryColors[i-1] + "\"></div>" +
 			"</div>" +
 
 			"<table class='table'>" +
