@@ -130,7 +130,7 @@ function shuffleDic(dic) {
 function readFromCSV() {
 	$.ajax({
 		type: "GET",
-		url: "./food-candidate-labels.csv",
+		url: "./candidate_labels.csv",
 		dataType: "text",
 		success: function (response) {
 			var dic = {};

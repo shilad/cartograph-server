@@ -14,6 +14,7 @@ from server.SearchService import SearchService
 from server.StaticService import StaticService
 from server.TemplateService import TemplateService
 from server.TileService import TileService
+from server.LabelTestService import LabelTestService
 
 
 class Map:
@@ -50,6 +51,7 @@ class Map:
         self.template_service = TemplateService(conf)
         self.static_service = StaticService(conf)
         self.search_service = SearchService(self.point_service)
+        self.labeltest_service = LabelTestService(conf)
 
     def trigger_update(self):
         """Trigger this map to be re-initialized across all servers. It is the responsibility of anyone who modifies
