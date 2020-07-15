@@ -1,6 +1,6 @@
 [DEFAULT]
 dataset: food
-experimentID: 0003
+experimentID: 0001
 baseDir: ./experiment/%(dataset)s/%(experimentID)s
 generatedDir: ./data/%(dataset)s/%(experimentID)s
 

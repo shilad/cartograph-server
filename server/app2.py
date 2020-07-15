@@ -9,8 +9,7 @@ from server.ParentService import ParentService, METACONF_FLAG
 from server.AddMapService import AddMapService
 from server.Map import Map
 from server.StaticService import StaticService
-from server.UploadService import UploadService
-
+from server.LabelTestService import LabelTestService
 
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 
@@ -71,6 +70,7 @@ app.add_route('/{map_name}/log', ParentService(map_services, 'logging_service'))
 app.add_route('/{map_name}/add_metric/{metric_type}', ParentService(map_services, 'add_metric_service'))
 app.add_route('/{map_name}/info', ParentService(map_services, 'info_service'))
 app.add_sink(ParentService(map_services, 'static_service').on_get, '/(?P<map_name>.+)/static')
+app.add_sink(ParentService(map_services, 'labeltest_service').on_get, '/(?P<map_name>.+)/static/candidate_labels.csv')
 
 
 # If the server is in multi-map mode, provide hooks for adding new maps
@@ -84,7 +84,6 @@ app.add_sink(ParentService(map_services, 'static_service').on_get, '/(?P<map_nam
 
 # Add way to get static files generally (i.e. without knowing the name of any active map)
 app.add_sink(StaticService().on_get, '/static')
-
 
 # Useful for debugging problems in your API; works with pdb.set_trace(). You
 # can also use Gunicorn to host your app. Gunicorn can be configured to
