@@ -1,0 +1,21 @@
+[DEFAULT]
+dataset: georgraphy
+experimentID: 0001
+baseDir: ./experiments/%(dataset)s/%(experimentID)s
+generatedDir: %(baseDir)s
+
+[SERVER]
+base_url: http://vm2.harriet.macalester.edu/%(dataset)s
+
+[PreprocessingConstants]
+sample_size: 50000
+num_clusters: 9
+water_level: .05
+sample_borders: True
+num_contours: 7
+
+[Server]
+compress_png: false
+
+[Metrics]
+active:

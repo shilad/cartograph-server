@@ -29,6 +29,6 @@ docker run \
     -e CARTOGRAPH_CONFIGS="$conf" \
     -v "$(pwd)":/cartograph-server \
     -w /cartograph-server \
-    -p 4000:4000 \
+    -p 3000:3000 \
     shilad/cartograph-base:latest \
-    gunicorn --workers 4 -b 0.0.0.0:4000 app2:app --reload
+    gunicorn --workers 4 -b 0.0.0.0:3000 app2:app --reload

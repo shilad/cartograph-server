@@ -31,7 +31,7 @@ class PointService:
         )
 
         # logging.warning(self.points)
-        print(self.points)
+        #print(self.points)
         for k, v in self.points.items():
             if 'x' not in v:
                 logging.warning(str(k) + "doesn't have x")
