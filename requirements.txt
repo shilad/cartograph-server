@@ -1,0 +1,12 @@
+gunicorn
+falcon
+falcon-multipart
+pandas
+shapely
+colour
+palettable
+palettable
+scipy
+cairocffi
+marisa_trie
+jinja2
