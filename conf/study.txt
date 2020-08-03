@@ -1,0 +1,5 @@
+######
+./conf/food.txt
+./conf/georgraphy.txt
+./conf/technology.txt
+./conf/education.txt

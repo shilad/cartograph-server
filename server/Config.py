@@ -29,7 +29,7 @@ class Config:
         logger.info(config_file)
         parser = SafeConfigParser()
         # read default file
-        with open("./defaultconfig.txt", "r") as file:
+        with open("./conf/defaultconfig.txt", "r") as file:
             parser.readfp(file)
         # read customized setup file
         logger.info('using configuration file %s' % (`file`))
