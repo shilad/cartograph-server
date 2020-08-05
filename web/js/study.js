@@ -2,13 +2,14 @@
 // handles the navigational workflow
 // Author: Rock Pang
 
-function Study(parentContainer) {
+function Study(parentContainer, labelDic) {
     this.parentContainer = parentContainer;
     this.tasks = parentContainer.find('.task');
     this.currentIndex = 0;
     this.url = "";
+    this.labelDic = labelDic;
 
-    	var constraints = {
+    var constraints = {
 		task1 : {
 			feedback : { presence: true, length : { minimum : 3 }}
 		},
@@ -60,7 +61,8 @@ function Study(parentContainer) {
         // validate the form
 		let errorP = $(currForm).find(".error");
 		if($(currTask).is(".task")) {
-			if($(currForm).find(":checked").length < 10) {
+			let labelLength = $(currForm).find(".table").find("tbody").find("tr").length;
+			if($(currForm).find(":checked").length < labelLength) {
 				errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
 				return this;
 			}
@@ -144,7 +146,6 @@ function process(response) {
 		}
 		dic[country].push(label);
 	}
-	console.log(dic);
 	return dic;
 }
 
@@ -166,28 +167,31 @@ function shuffleDic(dic) {
 	return newDic;
 }
 
-function readFromCSV() {
-	$.ajax({
-		type: "GET",
-		url: "./candidate_labels.csv",
-		dataType: "text",
-		success: function (response) {
-			var dic = {};
-			var allRows = response.split(/\r?\n|\r/);
-			for(var singleRow = 1; singleRow < allRows.length - 1; singleRow++) {
-				var rowCells = allRows[singleRow].split(',');
-				var country = rowCells[1];
-				var label = rowCells[2];
-				if(!(country in dic)) {
-					dic[country] = [];
+const readFromCSV = async () => {
+	return new Promise(resolve => {
+		$.ajax({
+			type: "GET",
+			url: "./candidate_labels.csv",
+			dataType: "text",
+			success: function (response) {
+				var dic = {};
+				var allRows = response.split(/\r?\n|\r/);
+				for (var singleRow = 1; singleRow < allRows.length - 1; singleRow++) {
+					var rowCells = allRows[singleRow].split(',');
+					var country = rowCells[1];
+					var label = rowCells[2];
+					if (!(country in dic)) {
+						dic[country] = [];
+					}
+					dic[country].push(label);
 				}
-				dic[country].push(label);
+				var shuffledDic = shuffleDic(dic);
+				showSurveyQuestions(shuffledDic);
+
+				resolve(dic);
 			}
-			var shuffledDic = shuffleDic(dic);
-			console.log(shuffledDic);
-			showSurveyQuestions(shuffledDic);
-		}
-	});
+		})
+	})
 }
 
 function showSurveyQuestions(dic) {
@@ -216,7 +220,6 @@ function showSurveyQuestions(dic) {
 				"<tbody>";
 
 		let labels = dic[i];
-		console.log(labels);
 		for(var j = 0; j < labels.length; j++) {
 			let labelhtmlStr =
 					"<tr>" +
