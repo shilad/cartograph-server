@@ -8,6 +8,36 @@ function Study(parentContainer) {
     this.currentIndex = 0;
     this.url = "";
 
+    	var constraints = {
+		task1 : {
+			feedback : { presence: true, length : { minimum : 3 }}
+		},
+		task2 : {
+			feedback : { presence: true, length : { minimum : 3 }}
+		},
+		task3 : {
+			feedback : { presence: true, length : { minimum : 3 }}
+		},
+		customtheme1 : {
+			age : { presence: true, numericality : true },
+			gender: { presence: true },
+			quick: { presence: true },
+			explain: { presence: true },
+			grouping: { presence: true },
+			learned: { presence: true }
+		},
+		customtheme2 : {
+			easy: { presence: true },
+			fun: { presence: true },
+			successful: { presence: true },
+			editFreq: { presence: true },
+			genderFreq: { presence: true }
+		},
+		customtheme3 : {
+		}
+
+	};
+
     this.tasks.push($('#surveyQuestions1'));
     this.tasks.push($('#surveyQuestions2'));
     this.tasks.push($('#surveyQuestions3'));
@@ -29,10 +59,21 @@ function Study(parentContainer) {
 
         // validate the form
 		let errorP = $(currForm).find(".error");
-		if($(currForm).find(":checked").length < 10) {
-			errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
-			return this;
+		if($(currTask).is(".task")) {
+			if($(currForm).find(":checked").length < 10) {
+				errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
+				return this;
+			}
+		} else {
+			var surveyValues = validate.collectFormValues(currForm[0]);
+			var result = validate(surveyValues, constraints[currForm[0].id]);
+
+			if (result) {
+				errorP.html(htmlEncode("Please fill out all survey questions to help our research!")).fadeIn(500);
+				return this;
+			}
 		}
+
 		errorP.text('').hide();
 
 		// Generate url and logging  TODO: Remove URL
@@ -45,8 +86,6 @@ function Study(parentContainer) {
         var nextTask = (this.currentIndex < this.tasks.length-1)
 			? $(this.tasks[this.currentIndex + 1])
 			: null;
-
-        alert(this.url);
 
 		currTask.fadeOut(200, function () {
 			if (nextTask) nextTask.fadeIn(100);
@@ -69,7 +108,6 @@ function getValues(form) {
 	$.each(form.serializeArray(), function(i, field) {
 		values[field.name] = field.value;
 	})
-	alert(values['label1']);
 	return values;
 }
 
@@ -106,6 +144,7 @@ function process(response) {
 		}
 		dic[country].push(label);
 	}
+	console.log(dic);
 	return dic;
 }
 
@@ -135,7 +174,7 @@ function readFromCSV() {
 		success: function (response) {
 			var dic = {};
 			var allRows = response.split(/\r?\n|\r/);
-			for(var singleRow = 0; singleRow < allRows.length; singleRow++) {
+			for(var singleRow = 1; singleRow < allRows.length - 1; singleRow++) {
 				var rowCells = allRows[singleRow].split(',');
 				var country = rowCells[1];
 				var label = rowCells[2];
@@ -145,40 +184,24 @@ function readFromCSV() {
 				dic[country].push(label);
 			}
 			var shuffledDic = shuffleDic(dic);
+			console.log(shuffledDic);
 			showSurveyQuestions(shuffledDic);
 		}
 	});
 }
 
-function adjustColor(color) {
-	// takes in a raw color string eg "#ffffff"
-	// ClusterMetric adjustCountryColor
-	// return new hsvtorgb
-}
-
-
 function showSurveyQuestions(dic) {
-	//TODO: avoid caching
-	// var dic = { 3 : ["Hi", "a", "b", "c", "d", "e", "f", "g", "h", "i"],
-	// 	2 : ["Hi", "az", "bz", "cz", "d", "e", "f", "g", "h", "i"],
-	// 	1 : ["malayian states", "food and drinks", "Chinese states", "Korean Barbecue", "Japanese Sushi", "Indonesia Seafood",
-	// 		"Vietnamese Pho", "Nepalese Food", "Taiwanese Desert", "Indian Curry"]
-	// };
-	// var dic = readFromCSV(directory)
-	//
-	// var dic = readFromCSV();
-//	let ratings = ["Very Bad", "Bad", "Neutral", "Good", "Very Good"];
 	let ratings = ["Very Bad", "Neutral", "Very Good"];
 	let colors = ['table-danger', 'table-warning', 'table-success'];
 	let countryColors = ['#e9e1be', '#ddcdd3', '#d8e5bf', '#fcb2b2', '#a997ca', '#f7d583',
 						'#76abea', '#f0cab2', '#b6e7e0', '#f5b2cc', '#bccfb9'];
 
-	for(var i = 1; i <= Object.keys(dic).length; i++) {
+	for(var i = 0; i <= Object.keys(dic).length; i++) {
 		let country = $('#country' + i);
 		let htmlStr =
 			"<div class='container' style='display: flex; justify-content: space-around'>" +
-				"<div><h6>Potential Labels for Country " + i + ", colored: </h6></div>" +
-				"<div class='card' style=\"width:30px; height: 20px; background-color: " + countryColors[i-1] + "\"></div>" +
+				"<div><h6>Potential Labels for Country " + i + 1 + ", colored: </h6></div>" +
+				"<div class='card' style=\"width:30px; height: 20px; background-color: " + countryColors[i] + "\"></div>" +
 			"</div>" +
 
 			"<table class='table'>" +
@@ -193,6 +216,7 @@ function showSurveyQuestions(dic) {
 				"<tbody>";
 
 		let labels = dic[i];
+		console.log(labels);
 		for(var j = 0; j < labels.length; j++) {
 			let labelhtmlStr =
 					"<tr>" +
@@ -221,40 +245,5 @@ function showSurveyQuestions(dic) {
 			 		"</div>";
 		htmlStr += "</div>";
 		country.append(htmlStr);
-
 	}
 }
-
-$(document).ready(function() {
-	readFromCSV();
-
-	$('#startStudyButton').click(function() {
-		$('body').chardinJs('start'); // Show the directions
-		$('#introContainer').hide();
-		showCartoDemo();
-	});
-	CG.log({ event : 'startSurvey' });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

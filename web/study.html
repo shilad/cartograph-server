@@ -242,17 +242,37 @@
 
 	<div id="surveyContainer" data-intro="Your task is defined here. Enter your responses in the text box and click the finish task button when you are ready to go on to the next task." data-position="left">
 		<div class="task">
-			<form action="" method="post" id="country1">
+			<form action="" method="post" id="country0">
 			</form>
 		</div>
 
 		<div class="task">
-			<form action="" method="post" id="country2">
+			<form action="" method="post" id="country1">
 			</form>
 		</div>
 
         <div class="task">
+            <form action="" method="post" id="country2">
+            </form>
+        </div>
+
+        <div class="task">
             <form action="" method="post" id="country3">
+            </form>
+        </div>
+
+        <div class="task">
+            <form action="" method="post" id="country4">
+            </form>
+        </div>
+
+        <div class="task">
+            <form action="" method="post" id="country5">
+            </form>
+        </div>
+
+        <div class="task">
+            <form action="" method="post" id="country6">
             </form>
         </div>
 
@@ -586,11 +606,20 @@
 	<script src="js/study.js"></script>
 
     <script>
-		CG.init('cluster');
+        readFromCSV();
+
+        CG.init('cluster');
       	CG.map.setView([0, 0], 4);
+
+        $('#startStudyButton').click(function() {
+            $('body').chardinJs('start'); // Show the directions
+            $('#introContainer').hide();
+            showCartoDemo();
+        });
+        CG.log({ event : 'startSurvey' });
+
       	var study = new Study($('#surveyContainer'));
 		$("#help-icon").on('click', showCartoDemo);
-
     </script>
 
   </body>
