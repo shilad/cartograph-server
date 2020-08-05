@@ -202,9 +202,10 @@ function showSurveyQuestions(dic) {
 
 	for(var i = 0; i <= Object.keys(dic).length; i++) {
 		let country = $('#country' + i);
+		let countryLabelText = i + 1;
 		let htmlStr =
 			"<div class='container' style='display: flex; justify-content: space-around'>" +
-				"<div><h6>Potential Labels for Country " + i + 1 + ", colored: </h6></div>" +
+				"<div><h6>Potential Labels for Country " + countryLabelText + ", colored: </h6></div>" +
 				"<div class='card' style=\"width:30px; height: 20px; background-color: " + countryColors[i] + "\"></div>" +
 			"</div>" +
 
