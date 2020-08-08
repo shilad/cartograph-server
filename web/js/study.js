@@ -2,23 +2,14 @@
 // handles the navigational workflow
 // Author: Rock Pang
 
-function Study(parentContainer, labelDic) {
+function Study(parentContainer) {
     this.parentContainer = parentContainer;
     this.tasks = parentContainer.find('.task');
     this.currentIndex = 0;
     this.url = "";
-    this.labelDic = labelDic;
+    this.mapCenterDic = {};
 
     var constraints = {
-		task1 : {
-			feedback : { presence: true, length : { minimum : 3 }}
-		},
-		task2 : {
-			feedback : { presence: true, length : { minimum : 3 }}
-		},
-		task3 : {
-			feedback : { presence: true, length : { minimum : 3 }}
-		},
 		customtheme1 : {
 			age : { presence: true, numericality : true },
 			gender: { presence: true },
@@ -43,15 +34,6 @@ function Study(parentContainer, labelDic) {
     this.tasks.push($('#surveyQuestions2'));
     this.tasks.push($('#surveyQuestions3'));
     this.tasks.push($('#thankYou'));
-    /// need to incorporate file reading
-
-    for(var i = 0; i < this.tasks.length; i++) {
-        if(i == this.currentIndex) {
-            $(this.tasks[i]).show();
-        } else {
-            $(this.tasks[i]).hide();
-        }
-    }
 
     this.next = function() {
         let currTask = $(this.tasks[this.currentIndex]);
@@ -98,10 +80,48 @@ function Study(parentContainer, labelDic) {
 		return this;
     };
 
-    var thisSurvey = this;
+    this.mapCenterDic = getMapCenterDic(function(dic) {
+    	return dic;
+	});
+    console.log(this.mapCenterDic);
+
+	for(var i = 0; i < this.tasks.length; i++) {
+		if (i == this.currentIndex) {
+			$(this.tasks[i]).show();
+			var mapURL = "study.html/#cluster/4/" + this.mapCenterDic[i][0] + this.mapCenterDic[i][1];
+			// window.location.replace(this.mapCenterDic[i]);
+		} else {
+			$(this.tasks[i]).hide();
+		}
+	}
+	var thisSurvey = this;
 	this.parentContainer.on('click', '[data-action=next]', function(e){
 		e.preventDefault();
 		thisSurvey.next();
+	});
+}
+
+const getMapCenterDic = (callback) => {
+	$.ajax({
+		type: "GET",
+		url: "./try.csv",
+		dataType: "text",
+		success: function(response) {
+			var dic = {};
+			var allRows = response.split(/\r?\n|\r/);
+			for (var singleRow = 1; singleRow < allRows.length - 1; singleRow++) {
+				var rowCells = allRows[singleRow].split(',');
+				var country = parseInt(rowCells[0]);
+				var x = rowCells[1];
+				var y = rowCells[2];
+				if (!(country in dic)) {
+					dic[country] = [];
+				}
+				dic[country].push(x);
+				dic[country].push(y);
+			}
+			callback.call(this, dic);
+		}
 	});
 }
 

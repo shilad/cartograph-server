@@ -604,12 +604,25 @@
     <script src="js/chardin.min.js"></script>
 <!--    <script src="js/survey.js"></script>-->
 	<script src="js/study.js"></script>
+    <script src="js/carto-hash.js"></script>
 
     <script>
         readFromCSV();
 
-        CG.init('cluster');
-      	CG.map.setView([0, 0], 4);
+        // CG.init('cluster');
+      	// CG.map.setView([0, 0], 4);
+          var layer = 'cluster';
+          if (window.location.hash) {
+            var l = L.Hash.parseHash(window.location.hash);
+            if (l && l.layer) {
+              layer = l.layer;
+            }
+            CG.init(l.layer);
+            CG.map.setView(l.center, l.zoom);
+          } else {
+            CG.init(layer);
+            CG.map.setView([0, 0], 4);
+          }
 
         $('#startStudyButton').click(function() {
             $('body').chardinJs('start'); // Show the directions
