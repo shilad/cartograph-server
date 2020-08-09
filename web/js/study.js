@@ -123,8 +123,8 @@ function getMapCenterDic(){
 				if (!(country in dic)) {
 					dic[country] = [];
 				}
-				dic[country].push(x);
 				dic[country].push(y);
+				dic[country].push(x);
 			}
 			ret = dic;
 		}
