@@ -80,16 +80,14 @@ function Study(parentContainer) {
 		return this;
     };
 
-    this.mapCenterDic = getMapCenterDic(function(dic) {
-    	return dic;
-	});
-    console.log(this.mapCenterDic);
+	this.mapCenterDic = getMapCenterDic();
 
 	for(var i = 0; i < this.tasks.length; i++) {
 		if (i == this.currentIndex) {
 			$(this.tasks[i]).show();
-			var mapURL = "study.html/#cluster/4/" + this.mapCenterDic[i][0] + this.mapCenterDic[i][1];
-			// window.location.replace(this.mapCenterDic[i]);
+			var mapURL = "study.html#cluster/4/" + this.mapCenterDic[i][0] + "/" + this.mapCenterDic[i][1];
+			console.log(mapURL);
+			window.location.replace(mapURL);
 		} else {
 			$(this.tasks[i]).hide();
 		}
@@ -101,11 +99,13 @@ function Study(parentContainer) {
 	});
 }
 
-const getMapCenterDic = (callback) => {
+function getMapCenterDic(){
+	var hi = {};
 	$.ajax({
 		type: "GET",
 		url: "./try.csv",
 		dataType: "text",
+		async: false,
 		success: function(response) {
 			var dic = {};
 			var allRows = response.split(/\r?\n|\r/);
@@ -120,9 +120,12 @@ const getMapCenterDic = (callback) => {
 				dic[country].push(x);
 				dic[country].push(y);
 			}
-			callback.call(this, dic);
+			hi = dic;
+			console.log(hi);
 		}
 	});
+
+	return hi;
 }
 
 function getValues(form) {
