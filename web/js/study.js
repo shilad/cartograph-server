@@ -7,7 +7,7 @@ function Study(parentContainer) {
     this.tasks = parentContainer.find('.task');
     this.currentIndex = 0;
     this.url = "";
-    this.mapCenterDic = {};
+    this.mapCenterDic = getMapCenterDic();
 
     var constraints = {
 		customtheme1 : {
@@ -71,6 +71,12 @@ function Study(parentContainer) {
 			? $(this.tasks[this.currentIndex + 1])
 			: null;
 
+        if(this.currentIndex + 1 <= this.tasks.length - 4) {
+			let mapURL = "study.html#cluster/4/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
+			console.log(mapURL);
+			window.location.replace(mapURL);
+		}
+
 		currTask.fadeOut(200, function () {
 			if (nextTask) nextTask.fadeIn(100);
 		});
@@ -80,8 +86,7 @@ function Study(parentContainer) {
 		return this;
     };
 
-	this.mapCenterDic = getMapCenterDic();
-
+    console.log(this.mapCenterDic);
 	for(var i = 0; i < this.tasks.length; i++) {
 		if (i == this.currentIndex) {
 			$(this.tasks[i]).show();
@@ -92,6 +97,7 @@ function Study(parentContainer) {
 			$(this.tasks[i]).hide();
 		}
 	}
+
 	var thisSurvey = this;
 	this.parentContainer.on('click', '[data-action=next]', function(e){
 		e.preventDefault();
@@ -100,7 +106,7 @@ function Study(parentContainer) {
 }
 
 function getMapCenterDic(){
-	var hi = {};
+	let ret = {};
 	$.ajax({
 		type: "GET",
 		url: "./try.csv",
@@ -120,12 +126,11 @@ function getMapCenterDic(){
 				dic[country].push(x);
 				dic[country].push(y);
 			}
-			hi = dic;
-			console.log(hi);
+			ret = dic;
 		}
 	});
 
-	return hi;
+	return ret;
 }
 
 function getValues(form) {
