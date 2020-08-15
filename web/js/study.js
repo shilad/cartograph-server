@@ -71,6 +71,7 @@ function Study(parentContainer) {
 			? $(this.tasks[this.currentIndex + 1])
 			: null;
 
+        // TODO: debug for transition between study and survey.
         if(this.currentIndex + 1 <= this.tasks.length - 4) {
 			let mapURL = "study.html#cluster/4/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
 			console.log(mapURL);
@@ -109,7 +110,7 @@ function getMapCenterDic(){
 	let ret = {};
 	$.ajax({
 		type: "GET",
-		url: "./try.csv",
+		url: "./country_centroid.csv",
 		dataType: "text",
 		async: false,
 		success: function(response) {

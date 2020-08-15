@@ -71,7 +71,7 @@ app.add_route('/{map_name}/add_metric/{metric_type}', ParentService(map_services
 app.add_route('/{map_name}/info', ParentService(map_services, 'info_service'))
 app.add_sink(ParentService(map_services, 'static_service').on_get, '/(?P<map_name>.+)/static')
 app.add_sink(ParentService(map_services, 'labeltest_service').on_get, '/(?P<map_name>.+)/static/candidate_labels.csv')
-app.add_sink(ParentService(map_services, 'autopan_service').on_get, '/(?P<map_name>.+)/static/try.csv')
+app.add_sink(ParentService(map_services, 'autopan_service').on_get, '/(?P<map_name>.+)/static/country_centroid.csv')
 
 # If the server is in multi-map mode, provide hooks for adding new maps
 # if map_services['_multi_map']:
