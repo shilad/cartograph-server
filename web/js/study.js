@@ -44,7 +44,7 @@ function Study(parentContainer) {
 		let errorP = $(currForm).find(".error");
 		if($(currTask).is(".task")) {
 			let labelLength = $(currForm).find(".table").find("tbody").find("tr").length;
-			if($(currForm).find(":checked").length < labelLength) {
+			if($(currForm).find(":checked").length < 1){ // labelLength) {
 				errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
 				return this;
 			}
@@ -60,6 +60,7 @@ function Study(parentContainer) {
 
 		errorP.text('').hide();
 
+
 		// Generate url and logging  TODO: Remove URL
 		for(var label_key in values) {
 			this.url += "&" + label_key + "=" + values[label_key];
@@ -72,10 +73,14 @@ function Study(parentContainer) {
 			: null;
 
         // TODO: debug for transition between study and survey.
-        if(this.currentIndex + 1 <= this.tasks.length - 4) {
+        console.log(this.currentIndex);
+        console.log(this.tasks.length - 4);
+
+        if(this.currentIndex + 1 < this.tasks.length - 4) {
 			let mapURL = "study.html#cluster/4/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
 			console.log(mapURL);
 			window.location.replace(mapURL);
+			console.log(window.location.pathname.split("/")[1]);
 		}
 
 		currTask.fadeOut(200, function () {
@@ -105,7 +110,11 @@ function Study(parentContainer) {
 		thisSurvey.next();
 	});
 }
-
+function myFunction() {
+          var topic = window.location.pathname.split("/")[1];
+          document.getElementById("replace1").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
+          document.getElementById("replace2").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
+        }
 function getMapCenterDic(){
 	let ret = {};
 	$.ajax({
@@ -229,11 +238,11 @@ function showSurveyQuestions(dic) {
 	let countryColors = ['#e9e1be', '#ddcdd3', '#d8e5bf', '#fcb2b2', '#a997ca', '#f7d583',
 						'#76abea', '#f0cab2', '#b6e7e0', '#f5b2cc', '#bccfb9'];
 
-	for(var i = 0; i <= Object.keys(dic).length; i++) {
+	for(var i = 0; i < Object.keys(dic).length; i++) {
 		let country = $('#country' + i);
 		let countryLabelText = i + 1;
 		let htmlStr =
-			"<div class='container' style='display: flex; justify-content: space-around'>" +
+			"<div class='left_contentlist'> <div class='itemconfiguration' style='padding-left: 30px;'> <div class='task' style='display: flex; justify-content: space-around'>" +
 				"<div><h6>Potential Labels for Country " + countryLabelText + ", colored: </h6></div>" +
 				"<div class='card' style=\"width:30px; height: 20px; background-color: " + countryColors[i] + "\"></div>" +
 			"</div>" +
@@ -253,7 +262,7 @@ function showSurveyQuestions(dic) {
 		for(var j = 0; j < labels.length; j++) {
 			let labelhtmlStr =
 					"<tr>" +
-						"<th scope='row' style='pointer-events:none;'>"  + dic[i][j] + "</th>";
+						"<th scope='row' style='pointer-events:none; text-align:center'>"  + dic[i][j] + "</th>";
 
 			for(var k = 0; k < ratings.length; k++) {
 				labelhtmlStr += " " +
@@ -276,7 +285,7 @@ function showSurveyQuestions(dic) {
 			 				"<p class=\"error\">&nbsp;</p>" +
 			 			"</div>" +
 			 		"</div>";
-		htmlStr += "</div>";
+		htmlStr += "</div> </div> </div>";
 		country.append(htmlStr);
 	}
 }

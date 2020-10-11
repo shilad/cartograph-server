@@ -13,7 +13,7 @@
     <meta name="twitter:title" content="The World of Wikipedia">
     <meta name="twitter:description" content="[TODO: Description goes here]">
     <meta name="twitter:image" content="../images/wikipediamap.png"><link data-require="bootstrap-css@3.2.0" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="bootstrap-5-columns.css" />
+    <!--<link rel="stylesheet" href="bootstrap-5-columns.css" />-->
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
@@ -93,9 +93,9 @@
         div.legend {
           font-size: 13px;
           width: 300px;
-          position: absolute;
+          position: relative;
           top: 10px;
-          right: 10px;
+          left: 10px;
           z-index: 1000000;
           border: 1px solid #f0f0f0;
           border-bottom: 2px solid #ccc;
@@ -197,33 +197,35 @@
     </style>
   </head>
 
-  <body>
+  <body onload="myFunction()">
     <div id="tooltip">&nbsp;</div>
     <div id="map">
 		<div id="mapHolder" data-intro="This is our map of Wikipedia. Countries give you an idea of the types of articles in them. The closer two article 'cities' (marked as white circles) are, the more related they are." data-position="bottom"></div>
-		<div id="cityHolder" data-intro="You can click on a city to view information about it." data-position="bottom">
-			<img src="images/ww1.png" height="171" width="360"/>
-		</div>
-		<div id="zoomHolder" data-intro="You can zoom in and out by clicking here or scrolling" data-position="right"></div>
-		<div id="help-icon">?</div>
+		<!--<div id="cityHolder" data-intro="You can click on a city to view information about it. A city's gender focus is the number of times the article mentions men or women." data-position="bottom">-->
+			<!--<img src="images/ww1.png" height="171" width="360"/>-->
+		<!--</div>-->
+		<!--<div id="zoomHolder" data-intro="You can zoom in and out by clicking here or scrolling" data-position="right"></div>-->
+		<!--<div id="help-icon">?</div>-->
 	</div>
-    <div id="search" data-intro="You can search for specific articles here" data-position="right">
-        <input id="search-field" type="text" placeholder="Search the map">
-    </div>
+    <!--<div id="search" data-intro="You can search for specific articles here" data-position="right">-->
+        <!--<input id="search-field" type="text" placeholder="Search the map">-->
+    <!--</div>-->
 
     <div class="legend" id="legend-gender">
-      <h1>Map of Wikipedia</h1>
+      <h1>Map of Wikipedia <span id="replace1"></span> Articles</h1>
       <p>
-        This map visualizes _____ Wikipedia articles.
+        This map visualizes Wikipedia articles under the category of <span id="replace2"></span>.
         Cities represent articles, with neighboring cities being related in meaning.
-		We are interested in the effectiveness of labeling
+		We are interested in the effectiveness of labeling each country on this map.
       </p>
     </div>
 
 
+
+
 	<div id="introContainer">
 		<div id="introContent">
-			<h1>Cartograph: Gender Focus of Wikipedia Articles</h1>
+			<h1>Cartograph: Visualizing Wikipedia Articles as Maps</h1>
 			<p>
 				Cartograph visualizes the English Wikipedia as an interactive geographical map.
 				City dots represent articles, colored by their belonging to each country.
@@ -231,14 +233,14 @@
 			<p>We would like your help to test the labeling of the country (articles in the same color).
 				During the study, you will perform three tasks exploring the data. Afterwards, you will be asked to answer several questions. The study should take about 15 minutes.
 			</p>
-			<p>We will n
-                ot  collect identifying information such as email or Username, but we will record your navigation and responses.</p>
+			<p>We will not collect identifying information such as email or Username, but we will record your navigation and responses.</p>
 			<p>If you have questions about this study, please contact <a href="mailto:ssen@macalester.edu">Shilad Sen</a>. Thank you for participating!</p>
 			<div id="startButtonContainer">
 				<button id="startStudyButton">Start User Study</button>
 			</div>
 		</div>
 	</div>
+
 
 	<div id="surveyContainer" data-intro="Your task is defined here. Enter your responses in the text box and click the finish task button when you are ready to go on to the next task." data-position="left">
 		<div class="task">
@@ -277,8 +279,8 @@
         </div>
 
 
-        <!-- General Survery Questions -->
-        <div id="surveyQuestions1">
+         <!--General Survery Questions-->
+        <div id="surveyQuestions1" class='surveyconfiguration' >
             <form action="" method="post" id="customtheme1">
                 <p>
                     <label for="age">Please enter your age</label>
@@ -293,7 +295,7 @@
                     </select>
                 </p>
                 <p>
-                    <label class="likertStatement">How quickly could you achieve your tasks?</label>
+                    <label class="likertStatement">How often does a label </label>
                     <ul class='likert'>
                         <li>
                         <input type="radio" name="quick" value="very_quickly">
@@ -429,7 +431,8 @@
 
             </form>
         </div>
-        <div id="surveyQuestions2">
+
+        <div id="surveyQuestions2" class='surveyconfiguration' >
             <form action="" method="post" id="customtheme2">
                 <p>
                     <label class="likertStatement">The tool was easy to use.</label>
@@ -555,7 +558,7 @@
 
             </form>
         </div>
-        <div id="surveyQuestions3">
+        <div id="surveyQuestions3" class='surveyconfiguration' >
             <form action="" method="post" id="customtheme3">
                 <p>
                     <label for="changeFeedback">If you could change anything about the tool, what would you change?</label>
@@ -569,7 +572,7 @@
                 <p class="error">&nbsp;</p>
             </form>
         </div>
-        <div id="thankYou">
+        <div id="thankYou" class='thankyouconfiguration'>
             <p><b>Thank you</b> for participating!</p>
             <p>If you have any questions about this study, please contact <a href="mailto:ssen@macalester.edu">Shilad Sen</a>.</p>
             <p>Please <b>share this study</b> with anybody who is interested in gender and Wikipedia using these links:</p>
@@ -602,34 +605,33 @@
     <!-- -->
     <script src="js/cartograph.js"></script>
     <script src="js/chardin.min.js"></script>
-<!--    <script src="js/survey.js"></script>-->
+    <script src="js/survey.js"></script>
 	<script src="js/study.js"></script>
     <script src="js/carto-hash.js"></script>
 
     <script>
         readFromCSV();
+         CG.init('cluster');
+      	 CG.map.setView([0, 0], 4);
+          <!--var layer = 'cluster';-->
+          <!--if (window.location.hash) {-->
+            <!--var l = L.Hash.parseHash(window.location.hash);-->
+            <!--if (l && l.layer) {-->
+              <!--layer = l.layer;-->
+            <!--}-->
+            <!--CG.init(l.layer);-->
+            <!--CG.map.setView(l.center, l.zoom);-->
+          <!--} else {-->
+            <!--CG.init(layer);-->
+            <!--CG.map.setView([0, 0], 4);-->
+          <!--}-->
 
-        // CG.init('cluster');
-      	// CG.map.setView([0, 0], 4);
-          var layer = 'cluster';
-          if (window.location.hash) {
-            var l = L.Hash.parseHash(window.location.hash);
-            if (l && l.layer) {
-              layer = l.layer;
-            }
-            CG.init(l.layer);
-            CG.map.setView(l.center, l.zoom);
-          } else {
-            CG.init(layer);
-            CG.map.setView([0, 0], 4);
-          }
-
-        $('#startStudyButton').click(function() {
-            $('body').chardinJs('start'); // Show the directions
-            $('#introContainer').hide();
-            showCartoDemo();
-        });
-        CG.log({ event : 'startSurvey' });
+        <!--$('#startStudyButton').click(function() {-->
+            <!--$('body').chardinJs('start'); // Show the directions-->
+            <!--$('#introContainer').hide();-->
+            <!--showCartoDemo();-->
+        <!--});-->
+        <!--CG.log({ event : 'startSurvey' });-->
 
       	var study = new Study($('#surveyContainer'));
 		$("#help-icon").on('click', showCartoDemo);

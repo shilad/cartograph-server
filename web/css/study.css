@@ -15,6 +15,53 @@
 .table tbody tr .table-success:hover {
     background-color: #5cb85c;
 }
+.itemconfiguration
+{
+		height: 70vh;
+		width:410px;
+		top:10px;
+		padding-right:15px;
+		/* background-color:#CCC; */
+        overflow-y:auto;
+        overflow-x: hidden;
+		float:left;
+		position:relative;
+		margin-left:-10px;
+		margin-bottom:10px;
+}
+.surveyconfiguration
+{
+		height: 85%;
+		width:410px;
+		top:10px;
+		left:10px;
+		right:10px;
+		padding-right:15px;
+		/* background-color:#CCC; */
+        overflow-y:auto;
+        overflow-x: hidden;
+		float:left;
+		position:relative;
+		margin-left:10px;
+		margin-bottom:10px;
+}
+
+.thankyouconfiguration
+{
+		height: 25vh;
+		width:410px;
+		top:10px;
+		left:10px;
+		right:10px;
+		padding-right:15px;
+		/* background-color:#CCC; */
+        overflow-y:auto;
+        overflow-x: hidden;
+		float:left;
+		position:relative;
+		margin-left:10px;
+		margin-bottom:10px;
+}
 
 input[type='radio'] {
     transform: scale(1.8);
