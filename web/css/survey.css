@@ -86,16 +86,16 @@
 form.likertStatement {
   display:block;
   font-weight: bold;
-  padding: 30px 0 0 4.25%;
-  margin-bottom:10px;
+  padding: 10px 0 0 4.25%;
+  margin-bottom:3px;
 }
 form.likert {
   list-style:none;
   width:100%;
   margin:0;
-  padding:0 0 35px;
+  padding:0 0 0px;
   display:block;
-  border-bottom:2px solid #efefef;
+  border-bottom:0px solid #efefef;
 }
 form .likert:last-of-type {border-bottom:0;}
 form .likert:before {
@@ -120,7 +120,7 @@ form .likert li input[type=radio] {
   top:0;
   left:50%;
   margin-left:-6px;
-  bottom: 5px;
+  bottom: 0px;
   
 }
 form .likert li label {

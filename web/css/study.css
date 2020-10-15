@@ -38,7 +38,7 @@
 		right:10px;
 		padding-right:15px;
 		/* background-color:#CCC; */
-        overflow-y:auto;
+        overflow-y: auto;
         overflow-x: hidden;
 		float:left;
 		position:relative;
@@ -48,7 +48,7 @@
 
 .thankyouconfiguration
 {
-		height: 25vh;
+		height: 28vh;
 		width:410px;
 		top:10px;
 		left:10px;
