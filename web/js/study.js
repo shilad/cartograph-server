@@ -8,6 +8,10 @@ function Study(parentContainer) {
     this.currentIndex = 0;
     this.url = "";
     this.mapCenterDic = getMapCenterDic();
+    this.logs = []
+    this.turkerid = "";
+    this.hitid = "";
+    this.checksum = "";
 
     var constraints = {
 		customtheme1 : {
@@ -39,12 +43,11 @@ function Study(parentContainer) {
         let currTask = $(this.tasks[this.currentIndex]);
         let currForm = currTask.find("form");
         let values = getValues(currForm);
-
         // validate the form
 		let errorP = $(currForm).find(".error");
 		if($(currTask).is(".task")) {
 			let labelLength = $(currForm).find(".table").find("tbody").find("tr").length;
-			if($(currForm).find(":checked").length < 1){ // labelLength) {
+			if($(currForm).find(":checked").length < labelLength) {
 				errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
 				return this;
 			}
@@ -65,22 +68,17 @@ function Study(parentContainer) {
 		for(var label_key in values) {
 			this.url += "&" + label_key + "=" + values[label_key];
 		}
-        CG.log({ event : 'study', 'formid' : currForm.id, values : values, index : this.currentIndex });
+        CG.log({ event : 'study', formid : currForm[0].id, values : values, index : this.currentIndex });
+
 
         // Transition to the next form
         var nextTask = (this.currentIndex < this.tasks.length-1)
 			? $(this.tasks[this.currentIndex + 1])
 			: null;
 
-        // TODO: debug for transition between study and survey.
-        console.log(this.currentIndex);
-        console.log(this.tasks.length - 4);
-
         if(this.currentIndex + 1 < this.tasks.length - 4) {
-			let mapURL = "study.html#cluster/4/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
-			console.log(mapURL);
+			let mapURL =  "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/4/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
 			window.location.replace(mapURL);
-			console.log(window.location.pathname.split("/")[1]);
 		}
 
 		currTask.fadeOut(200, function () {
@@ -92,13 +90,16 @@ function Study(parentContainer) {
 		return this;
     };
 
-    console.log(this.mapCenterDic);
 	for(var i = 0; i < this.tasks.length; i++) {
 		if (i == this.currentIndex) {
 			$(this.tasks[i]).show();
-			var mapURL = "study.html#cluster/4/" + this.mapCenterDic[i][0] + "/" + this.mapCenterDic[i][1];
-			console.log(mapURL);
-			window.location.replace(mapURL);
+			let queryString = window.location.search;
+			let urlParams = new URLSearchParams(queryString);
+			this.turkerid = urlParams.get('turkerid');
+			this.hitid = urlParams.get('hitid');
+			this.checksum = checksum2(this.turkerid + this.hitid);
+			var mapURL = "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/4/" + this.mapCenterDic[i][0] + "/" + this.mapCenterDic[i][1];
+			window.location.replace(mapURL); 
 		} else {
 			$(this.tasks[i]).hide();
 		}
@@ -110,10 +111,30 @@ function Study(parentContainer) {
 		thisSurvey.next();
 	});
 }
-function myFunction() {
+
+function checksum2(s) {
+  var hash = 0, strlen = s.length, i, c;
+  if ( strlen === 0 ) {
+    return hash;
+  }
+  for ( i = 0; i < strlen; i++ ) {
+    c = s.charCodeAt( i );
+    hash = ((hash << 5) - hash) + c;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+function replaceValues() {
           var topic = window.location.pathname.split("/")[1];
+          let queryString = window.location.search;
+		  let urlParams = new URLSearchParams(queryString);
+		  this.turkerid = urlParams.get('turkerid');
+		  this.hitid = urlParams.get('hitid');
+		  this.checksum = checksum2(this.turkerid + this.hitid);
           document.getElementById("replace1").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
           document.getElementById("replace2").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
+          document.getElementById("checksum").innerHTML = "<b>" + this.checksum + "</b>";
         }
 function getMapCenterDic(){
 	let ret = {};

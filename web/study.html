@@ -53,6 +53,7 @@
           font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
           font-size: 14px;
           line-height: 140%;
+          margin-bottom: 1px;
         }
 
         hr{
@@ -197,7 +198,7 @@
     </style>
   </head>
 
-  <body onload="myFunction()">
+  <body onload="replaceValues()">
     <div id="tooltip">&nbsp;</div>
     <div id="map">
 		<div id="mapHolder" data-intro="This is our map of Wikipedia. Countries give you an idea of the types of articles in them. The closer two article 'cities' (marked as white circles) are, the more related they are." data-position="bottom"></div>
@@ -247,6 +248,7 @@
 			<form action="" method="post" id="country0">
 			</form>
 		</div>
+
 
 		<div class="task">
 			<form action="" method="post" id="country1">
@@ -428,7 +430,6 @@
                 </p>
                 <input data-action="next" type="submit" name="submit" value="Submit" />
                 <p class="error">&nbsp;</p>
-
             </form>
         </div>
 
@@ -572,10 +573,13 @@
                 <p class="error">&nbsp;</p>
             </form>
         </div>
+
         <div id="thankYou" class='thankyouconfiguration'>
+
             <p><b>Thank you</b> for participating!</p>
             <p>If you have any questions about this study, please contact <a href="mailto:ssen@macalester.edu">Shilad Sen</a>.</p>
             <p>Please <b>share this study</b> with anybody who is interested in gender and Wikipedia using these links:</p>
+            <p>Your completion code is <span id="checksum"></span>.</p>
             <ul class="share-buttons">
               <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnokomis.macalester.edu%2Fcartograph%2Fstatic%2Fsurvey.html&t=Wikipedia%20Gender%20Focus%3A%20Mapped!" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="images/flat_web_icon_set/color/Facebook.png"></a></li>
               <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnokomis.macalester.edu%2Fcartograph%2Fstatic%2Fsurvey.html&text=Wikipedia%20Gender%20Focus%3A%20Mapped!:%20http%3A%2F%2Fnokomis.macalester.edu%2Fcartograph%2Fstatic%2Fsurvey.html" target="_blank" title="Tweet"><img alt="Tweet" src="images/flat_web_icon_set/color/Twitter.png"></a></li>
@@ -613,7 +617,8 @@
         readFromCSV();
          CG.init('cluster');
       	 CG.map.setView([0, 0], 4);
-          <!--var layer = 'cluster';-->
+
+          var layer = 'cluster';
           <!--if (window.location.hash) {-->
             <!--var l = L.Hash.parseHash(window.location.hash);-->
             <!--if (l && l.layer) {-->
@@ -631,7 +636,7 @@
             <!--$('#introContainer').hide();-->
             <!--showCartoDemo();-->
         <!--});-->
-        <!--CG.log({ event : 'startSurvey' });-->
+        CG.log({ event : 'startSurvey' });
 
       	var study = new Study($('#surveyContainer'));
 		$("#help-icon").on('click', showCartoDemo);
