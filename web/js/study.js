@@ -68,7 +68,8 @@ function Study(parentContainer) {
 		for(var label_key in values) {
 			this.url += "&" + label_key + "=" + values[label_key];
 		}
-        CG.log({ event : 'study', formid : currForm[0].id, values : values, index : this.currentIndex });
+        CG.log({ event : 'study', formid : currForm[0].id, values : values, index : this.currentIndex,
+                 turkerid : this.turkerid, hitid: this.hitid });
 
 
         // Transition to the next form
@@ -97,7 +98,7 @@ function Study(parentContainer) {
 			let urlParams = new URLSearchParams(queryString);
 			this.turkerid = urlParams.get('turkerid');
 			this.hitid = urlParams.get('hitid');
-			this.checksum = checksum2(this.turkerid + this.hitid);
+			this.checksum = crc32(this.turkerid + this.hitid);
 			var mapURL = "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/4/" + this.mapCenterDic[i][0] + "/" + this.mapCenterDic[i][1];
 			window.location.replace(mapURL); 
 		} else {
@@ -125,13 +126,37 @@ function checksum2(s) {
   return hash;
 };
 
+var makeCRCTable = function(){
+    var c;
+    var crcTable = [];
+    for(var n =0; n < 256; n++){
+        c = n;
+        for(var k =0; k < 8; k++){
+            c = ((c&1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
+        }
+        crcTable[n] = c;
+    }
+    return crcTable;
+}
+
+var crc32 = function(str) {
+    var crcTable = window.crcTable || (window.crcTable = makeCRCTable());
+    var crc = 0 ^ (-1);
+
+    for (var i = 0; i < str.length; i++ ) {
+        crc = (crc >>> 8) ^ crcTable[(crc ^ str.charCodeAt(i)) & 0xFF];
+    }
+
+    return (crc ^ (-1)) >>> 0;
+};
+
 function replaceValues() {
           var topic = window.location.pathname.split("/")[1];
           let queryString = window.location.search;
 		  let urlParams = new URLSearchParams(queryString);
 		  this.turkerid = urlParams.get('turkerid');
 		  this.hitid = urlParams.get('hitid');
-		  this.checksum = checksum2(this.turkerid + this.hitid);
+		  this.checksum = crc32(this.turkerid + this.hitid);
           document.getElementById("replace1").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
           document.getElementById("replace2").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
           document.getElementById("checksum").innerHTML = "<b>" + this.checksum + "</b>";
