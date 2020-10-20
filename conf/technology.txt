@@ -1,0 +1,19 @@
+[DEFAULT]
+dataset: technology
+experimentID: 0003
+baseDir: ./experiments/%(dataset)s//%(experimentID)s
+generatedDir: %(baseDir)s
+
+[PreprocessingConstants]
+sample_size: 50000
+num_clusters: 9
+water_level: .05
+sample_borders: True
+num_contours: 7
+
+[Server]
+compress_png: false
+base_url: http://vm2.harriet.macalester.edu/%(dataset)s
+
+[Metrics]
+active:
