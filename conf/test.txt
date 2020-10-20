@@ -1,0 +1,18 @@
+[DEFAULT]
+dataset: food
+experimentID: 0001
+baseDir: ./experiment/%(dataset)s/%(experimentID)s
+generatedDir: ./data/%(dataset)s/%(experimentID)s
+
+[PreprocessingConstants]
+sample_size: 50000
+num_clusters: 9
+water_level: .05
+sample_borders: True
+num_contours: 7
+
+[Server]
+compress_png: false
+
+[Metrics]
+active:
