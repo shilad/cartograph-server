@@ -18,7 +18,7 @@
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 600px;
+	width: 700px;
 	height: 500px;
 	position: absolute;
 	overflow: auto;
@@ -55,6 +55,10 @@
 }
 
 
+#startStudyButton {
+	background-color: #ddffdd;
+	font-weight: bold;
+}
 
 #surveyContainer {
     font-size: 13px;

@@ -92,6 +92,7 @@
         }
 
         div.legend {
+	  display: none;
           font-size: 13px;
           width: 300px;
           position: relative;
@@ -201,7 +202,7 @@
   <body onload="replaceValues()">
     <div id="tooltip">&nbsp;</div>
     <div id="map">
-		<div id="mapHolder" data-intro="This is our map of Wikipedia. Countries give you an idea of the types of articles in them. The closer two article 'cities' (marked as white circles) are, the more related they are." data-position="bottom"></div>
+		<div id="mapHolder" data-intro="This map visualizes Wikipedia articles about MAP-NAME. Two articles ('cities' marked as white circles) are closer to each other if they are related. Seven thematic regions have been assigned different colors. You can zoom in and out and pan the map like you would for Google or Bing Maps." data-position="bottom"></div>
 		<!--<div id="cityHolder" data-intro="You can click on a city to view information about it. A city's gender focus is the number of times the article mentions men or women." data-position="bottom">-->
 			<!--<img src="images/ww1.png" height="171" width="360"/>-->
 		<!--</div>-->
@@ -213,11 +214,11 @@
     <!--</div>-->
 
     <div class="legend" id="legend-gender">
-      <h1>Map of Wikipedia <span id="replace1"></span> Articles</h1>
+      <h1>Map of Wikipedia <span class="map-name"></span> Articles</h1>
       <p>
-        This map visualizes Wikipedia articles under the category of <span id="replace2"></span>.
+        This map visualizes Wikipedia articles under the category of <span class="map-name"></span>.
         Cities represent articles, with neighboring cities being related in meaning.
-		We are interested in the effectiveness of labeling each country on this map.
+	We are interested in the effectiveness of labeling each country on this map.
       </p>
     </div>
 
@@ -226,16 +227,21 @@
 
 	<div id="introContainer">
 		<div id="introContent">
-			<h1>Cartograph: Visualizing Wikipedia Articles as Maps</h1>
+			<h1>Cartograph: Visualizing Wikipedia as Maps</h1>
 			<p>
-				Cartograph visualizes the English Wikipedia as an interactive geographical map.
-				City dots represent articles, colored by their belonging to each country.
+			This webpage visualizes articles in English Wikipedia about <span class="map-name"></span> as an interactive geographical map.
+				Dots represent articles.
+				There are seven different colored thematic regions on each map that were identified by a computer program.
 			</p>
-			<p>We would like your help to test the labeling of the country (articles in the same color).
-				During the study, you will perform three tasks exploring the data. Afterwards, you will be asked to answer several questions. The study should take about 15 minutes.
+			<p>
+			We would like your help naming each colored region.
+			You will be asked about the quality of 15 potential names for each of the seven regions.
 			</p>
-			<p>We will not collect identifying information such as email or Username, but we will record your navigation and responses.</p>
-			<p>If you have questions about this study, please contact <a href="mailto:ssen@macalester.edu">Shilad Sen</a>. Thank you for participating!</p>
+			<p>The study should take about 15 minutes to complete. 
+			We will not  collect identifying information such as email or username, but we will record your navigation and responses, and your Mechanical Turk Worker Id. 
+			</p>
+			<p>This study has been approved by Macalester College's Institutional Review Board (IRB).
+			If you have questions about this study, please contact <a href="mailto:ssen@macalester.edu">Shilad Sen</a>. Thank you for participating!</p>
 			<div id="startButtonContainer">
 				<button id="startStudyButton">Start User Study</button>
 			</div>
@@ -243,7 +249,7 @@
 	</div>
 
 
-	<div id="surveyContainer" data-intro="Your task is defined here. Enter your responses in the text box and click the finish task button when you are ready to go on to the next task." data-position="left">
+	<div id="surveyContainer" data-intro="Your task is to rate possible labels for the colored region. You must rate each possible label and scroll down and click the submit button when you are ready to go on to the next task." data-position="left">
 		<div class="task">
 			<form action="" method="post" id="country0">
 			</form>
@@ -578,8 +584,7 @@
 
             <p><b>Thank you</b> for participating!</p>
             <p>If you have any questions about this study, please contact <a href="mailto:ssen@macalester.edu">Shilad Sen</a>.</p>
-            <p>Please <b>share this study</b> with anybody who is interested in gender and Wikipedia using these links:</p>
-            <p>Your completion code is <span id="checksum"></span>.</p>
+	    <p><b>Your completion code is <span id="checksum"></span>.</b> You can enter this into Mechanical Turk.</p>
             <ul class="share-buttons">
               <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnokomis.macalester.edu%2Fcartograph%2Fstatic%2Fsurvey.html&t=Wikipedia%20Gender%20Focus%3A%20Mapped!" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="images/flat_web_icon_set/color/Facebook.png"></a></li>
               <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnokomis.macalester.edu%2Fcartograph%2Fstatic%2Fsurvey.html&text=Wikipedia%20Gender%20Focus%3A%20Mapped!:%20http%3A%2F%2Fnokomis.macalester.edu%2Fcartograph%2Fstatic%2Fsurvey.html" target="_blank" title="Tweet"><img alt="Tweet" src="images/flat_web_icon_set/color/Twitter.png"></a></li>
