@@ -159,7 +159,6 @@ class RasterService:
         # First draw clusters
         for i in clusterIds:
             shp = polysByName[i]
-            logging.warning(colors)
             c = metric.adjustCountryColor(colors[str(i)][int(numContours)], 0)
             self._drawPoly(z, x, y, context, shp, c, (0.7, 0.7, 0.7))
             for j in range(numContours):
