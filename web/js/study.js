@@ -157,9 +157,15 @@ function replaceValues() {
 		  this.turkerid = urlParams.get('turkerid');
 		  this.hitid = urlParams.get('hitid');
 		  this.checksum = crc32(this.turkerid + this.hitid);
-          document.getElementById("replace1").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
-          document.getElementById("replace2").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
+	  var mapName = topic.charAt(0).toUpperCase() + topic.slice(1);
+	  $("span.map-name").text(mapName);
+          //document.getElementById("replace1").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
+          //document.getElementById("replace2").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
           document.getElementById("checksum").innerHTML = "<b>" + this.checksum + "</b>";
+	  $("div[data-intro]").attr("data-intro", function(index, text) {
+                return text.replace('MAP-NAME', mapName);
+          });     
+
         }
 function getMapCenterDic(){
 	let ret = {};
@@ -288,9 +294,9 @@ function showSurveyQuestions(dic) {
 		let country = $('#country' + i);
 		let countryLabelText = i + 1;
 		let htmlStr =
-			"<div class='left_contentlist'> <div class='itemconfiguration' style='padding-left: 15px;'> <div class='task' style='display: flex; justify-content: space-around'>" +
-				"<div><h6>Potential Labels for Country " + countryLabelText + ", colored: </h6></div>" +
-				"<div class='card' style=\"width:30px; height: 20px; background-color: " + countryColors[i] + "\"></div>" +
+			"<div class='left_contentlist'> <div class='itemconfiguration' style='padding-left: 30px;'> <div class='task' style='display: flex; justify-content: space-around'>" +
+				"<div><h6>Potential Labels for Region " + countryLabelText + ", colored: </h6></div>" +
+				"<div class='card' style=\"width:60px; height: 20px; background-color: " + countryColors[i] + "\"></div>" +
 			"</div>" +
 
 			"<table class='table'>" +
@@ -326,10 +332,10 @@ function showSurveyQuestions(dic) {
 		htmlStr+= "<p> <label class='taskLabel' for='task2Text'><strong><span></span> Additional missing labels? </label> <textarea name='feedback' id='task2Text' cols='30' rows='2' required></textarea></p>"
 
 		htmlStr += "<div class='row'>" +
-			 			"<div class='col-2'>" +
+			 			"<div class='col-4'>" +
 			 				"<input data-action=\"next\" type='submit' name='submit' value='Submit'/>" +
 			 			"</div>" +
-			 			"<div class='col-10'>" +
+			 			"<div class='col-6'>" +
 			 				"<p class=\"error\">&nbsp;</p>" +
 			 			"</div>" +
 			 		"</div>";
