@@ -31,7 +31,6 @@ class PointService:
         )
 
         # logging.warning(self.points)
-        print(self.points)
         for k, v in self.points.items():
             if 'x' not in v:
                 logging.warning(str(k) + "doesn't have x")
@@ -99,9 +98,6 @@ class PointService:
         matches = self.index.queryRect(extent[0], extent[1], extent[2], extent[3], maxN)
         results = []
         for (pop, id, x, y) in matches:
-            # print pop, id, x, y
-            # print(self.points[id]['skipped'])
-            # if id in self.points and not self.points[id]['skipped']:
             if id in self.points:
                 results.append(self.points[id])
         return results
@@ -112,8 +108,6 @@ class PointService:
             (r, g, b, a) = metric.getColor(p, z)
             def f(x): return int(255 * x)
             color = 'rgba(%d,%d,%d,%.3f)' % (f(r), f(g), f(b), a)
-            logging.warning("######################################3")
-            logging.warning(color)
             props = { 'id' : p['id'],
                       'zpop' : p['zpop'],
                       'color' : color,
