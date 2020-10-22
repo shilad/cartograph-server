@@ -35,8 +35,8 @@ function Study(parentContainer) {
 	};
 
     this.tasks.push($('#surveyQuestions1'));
-    this.tasks.push($('#surveyQuestions2'));
-    this.tasks.push($('#surveyQuestions3'));
+//    this.tasks.push($('#surveyQuestions2'));
+//    this.tasks.push($('#surveyQuestions3'));
     this.tasks.push($('#thankYou'));
 
     this.next = function() {
@@ -47,7 +47,7 @@ function Study(parentContainer) {
 		let errorP = $(currForm).find(".error");
 		if($(currTask).is(".task")) {
 			let labelLength = $(currForm).find(".table").find("tbody").find("tr").length;
-			if($(currForm).find(":checked").length < labelLength) {
+			if($(currForm).find(":checked").length  < 1) { //< labelLength) {
 				errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
 				return this;
 			}
@@ -55,10 +55,10 @@ function Study(parentContainer) {
 			var surveyValues = validate.collectFormValues(currForm[0]);
 			var result = validate(surveyValues, constraints[currForm[0].id]);
 
-			if (result) {
-				errorP.html(htmlEncode("Please fill out all survey questions to help our research!")).fadeIn(500);
-				return this;
-			}
+//			if (result) {
+//				errorP.html(htmlEncode("Please fill out all survey questions to help our research!")).fadeIn(500);
+//				return this;
+//			}
 		}
 
 		errorP.text('').hide();
@@ -279,8 +279,8 @@ const readFromCSV = async () => {
 }
 
 function showSurveyQuestions(dic) {
-	let ratings = ["Very Bad", "Neutral", "Very Good"];
-	let colors = ['table-danger', 'table-warning', 'table-success'];
+	let ratings = ["Very Bad", "   ", "Neutral", "   ", "Very Good"];
+	let colors = ['table-primary','table-danger', 'table-primary','table-danger', 'table-primary'];
 	let countryColors = ['#e9e1be', '#ddcdd3', '#d8e5bf', '#fcb2b2', '#a997ca', '#f7d583',
 						'#76abea', '#f0cab2', '#b6e7e0', '#f5b2cc', '#bccfb9'];
 
@@ -288,7 +288,7 @@ function showSurveyQuestions(dic) {
 		let country = $('#country' + i);
 		let countryLabelText = i + 1;
 		let htmlStr =
-			"<div class='left_contentlist'> <div class='itemconfiguration' style='padding-left: 30px;'> <div class='task' style='display: flex; justify-content: space-around'>" +
+			"<div class='left_contentlist'> <div class='itemconfiguration' style='padding-left: 15px;'> <div class='task' style='display: flex; justify-content: space-around'>" +
 				"<div><h6>Potential Labels for Country " + countryLabelText + ", colored: </h6></div>" +
 				"<div class='card' style=\"width:30px; height: 20px; background-color: " + countryColors[i] + "\"></div>" +
 			"</div>" +
@@ -297,9 +297,11 @@ function showSurveyQuestions(dic) {
 				"<thead>" +
 					"<tr>" +
 						"<th scope='col'></th>" +
-						"<th scope='col' style='width: 15%'>Very Bad</th>" +
-						"<th scope='col' style='width: 15%'>Neutral</th>" +
-						"<th scope='col' style='width: 15%'>Very Good</th>" +
+						"<th scope='col' style='width: 9%'>Very Bad</th>" +
+						"<th scope='col' style='width: 13%'> </th>" +
+						"<th scope='col' style='width: 5%'>Neutral</th>" +
+						"<th scope='col' style='width: 9%'> </th>" +
+						"<th scope='col' style='width: 9%'>Very Good</th>" +
 					"</tr>" +
 				"</thead>" +
 				"<tbody>";
