@@ -46,7 +46,7 @@ function Study(parentContainer) {
 		let errorP = $(currForm).find(".error");
 		if($(currTask).is(".task")) {
 			let labelLength = $(currForm).find(".table").find("tbody").find("tr").length;
-			if($(currForm).find(":checked").length  < 1) { //< labelLength) {
+			if($(currForm).find(":checked").length  < labelLength) {
 				errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
 				return this;
 			}
