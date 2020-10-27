@@ -53,7 +53,8 @@
           font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
           font-size: 14px;
           line-height: 140%;
-          margin-bottom: 1px;
+          margin-bottom: 10px;
+          padding-bottom: 5px;
         }
 
         hr{
@@ -202,28 +203,8 @@
   <body onload="replaceValues()">
     <div id="tooltip">&nbsp;</div>
     <div id="map">
-		<div id="mapHolder" data-intro="This map visualizes Wikipedia articles about MAP-NAME. Two articles ('cities' marked as white circles) are closer to each other if they are related. Seven thematic regions have been assigned different colors. You can zoom in and out and pan the map like you would for Google or Bing Maps." data-position="bottom"></div>
-		<!--<div id="cityHolder" data-intro="You can click on a city to view information about it. A city's gender focus is the number of times the article mentions men or women." data-position="bottom">-->
-			<!--<img src="images/ww1.png" height="171" width="360"/>-->
-		<!--</div>-->
-		<!--<div id="zoomHolder" data-intro="You can zoom in and out by clicking here or scrolling" data-position="right"></div>-->
-		<!--<div id="help-icon">?</div>-->
+		<div id="mapHolder" data-intro="This map visualizes Wikipedia articles about MAP-NAME. Two articles ('cities' marked as circles) are closer to each other if they are related. Seven thematic regions have been assigned different colors. You can zoom in and out and pan the map like you would for Google or Bing Maps." data-position="bottom"></div>
 	</div>
-    <!--<div id="search" data-intro="You can search for specific articles here" data-position="right">-->
-        <!--<input id="search-field" type="text" placeholder="Search the map">-->
-    <!--</div>-->
-
-    <div class="legend" id="legend-gender">
-      <h1>Map of Wikipedia <span class="map-name"></span> Articles</h1>
-      <p>
-        This map visualizes Wikipedia articles under the category of <span class="map-name"></span>.
-        Cities represent articles, with neighboring cities being related in meaning.
-	We are interested in the effectiveness of labeling each country on this map.
-      </p>
-    </div>
-
-
-
 
 	<div id="introContainer">
 		<div id="introContent">
@@ -292,313 +273,54 @@
             <form action="" method="post" id="customtheme1">
                 <p>
                     <label for="age">Please enter your age</label>
-                    <input type="text" name="age" id="age" required/>
+                    <input type="text" name="age" id="age" style="float:right;margin-right:15px"/>
                 </p>
-                <!--<p>-->
-                    <!--<label for="gender">Please enter your gender</label>-->
-                    <!--<select name="gender" id="gender" required>-->
-                        <!--<option value="male">Male</option>-->
-                        <!--<option value="female">Female</option>-->
-                        <!--<option value="other">Other</option>-->
-                    <!--</select>-->
-                <!--</p>-->
                 <p>
                     <label for="gender">Please enter your gender</label>
-                    <input type="text" name="age" id="gender" required/>
+                    <input type="text" name="age" id="gender" style="float:right;margin-right:15px"/>
                 </p>
-                <div>
                     <form action="" method="post" id="customtheme3">
                 <p>
-                    <label for="changeFeedback">Did at least one of the labels for each country provide a good summary of the articles?</label>
-                    <textarea name="changeFeedback" id="changeFeedback" cols="40" rows="10"></textarea>
+                    <label class="likertStatement">Did at least one of the labels for each country provide a good summary of the articles?</label>
+                    <ul class='likert'>
+                        <li>
+                        <input type="radio" name="atLeastOne" value="Yes">
+                        <label>Yes</label>
+                        </li>
+                        <li>
+                        <input type="radio" name="atLeastOne" value="No">
+                        <label>No</label>
+                        </li>
+                        <li>
+                        <input type="radio" name="atLeastOne" value="NoIdea">
+                        <label>No Idea</label>
+                        </li>
+                    </ul>
                 </p>
                 <p>
-                    <label for="finalComments">Do you have any other feedback about this study or the interactive map?</label>
-                    <textarea name="finalComments" id="finalComments" cols="40" rows="10"></textarea>
+                    <label for="improvePilot">This is a pilot study before launching a HIT to a larger MTurk audience. Do you have any other feedback about this HIT we can use to improve the HIT before we launch it to a larger audience?</label>
+                    <textarea name="improvePilot" id="improvePilot" cols="50" rows="10"></textarea>
                 </p>
-                <input data-action="next" type="submit" name="submit" value="Submit" />
-                <p class="error">&nbsp;</p>
-            </form>
-                </div>
 
-                <!--<p>-->
-                    <!--<label class="likertStatement">How often does a label </label>-->
-                    <!--<ul class='likert'>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="quick" value="very_quickly">-->
-                        <!--<label>Very Quickly</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="quick" value="quickly">-->
-                        <!--<label>Quickly</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="quick" value="somewhat_quickly">-->
-                        <!--<label>Somewhat Quickly</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="quick" value="neutral">-->
-                        <!--<label>Neutral</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="quick" value="somewhat_slowly">-->
-                        <!--<label>Somewhat Slowly</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="quick" value="slowly">-->
-                        <!--<label>Slowly</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="quick" value="very_slowly">-->
-                        <!--<label>Very Slowly</label>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label class="likertStatement">The tool required a lot of explanation to use.</label>-->
-                    <!--<ul class='likert'>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="explain" value="strongly_agree">-->
-                        <!--<label>Strongly Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="explain" value="agree">-->
-                        <!--<label>Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="explain" value="somewhat_agree">-->
-                        <!--<label>Somewhat Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="explain" value="neutral">-->
-                        <!--<label>Neutral</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="explain" value="somewhat_disagree">-->
-                        <!--<label>Somewhat Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="explain" value="disagree">-->
-                        <!--<label>Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="explain" value="strongly_disagree">-->
-                        <!--<label>Strongly Disagree</label>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label class="likertStatement">It was unclear to me why specific articles were grouped together.</label>-->
-                    <!--<ul class='likert'>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="grouping" value="strongly_agree">-->
-                        <!--<label>Strongly Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="grouping" value="agree">-->
-                        <!--<label>Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="grouping" value="somewhat_agree">-->
-                        <!--<label>Somewhat Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="grouping" value="neutral">-->
-                        <!--<label>Neutral</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="grouping" value="somewhat_disagree">-->
-                        <!--<label>Somewhat Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="grouping" value="disagree">-->
-                        <!--<label>Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="grouping" value="strongly_disagree">-->
-                        <!--<label>Strongly Disagree</label>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label class="likertStatement">I learned new information about the data.</label>-->
-                    <!--<ul class='likert'>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="learned" value="strongly_agree">-->
-                        <!--<label>Strongly Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="learned" value="agree">-->
-                        <!--<label>Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="learned" value="somewhat_agree">-->
-                        <!--<label>Somewhat Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="learned" value="neutral">-->
-                        <!--<label>Neutral</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="learned" value="somewhat_disagree">-->
-                        <!--<label>Somewhat Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="learned" value="disagree">-->
-                        <!--<label>Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="learned" value="strongly_disagree">-->
-                        <!--<label>Strongly Disagree</label>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</p>-->
-                <!--<input data-action="next" type="submit" name="submit" value="Submit" />-->
-                <p class="error">&nbsp;</p>
+                <input data-action="next" type="submit" name="submit" value="Submit" />
+            </form>
             </form>
 
         </div>
 
-        <!--<div id="surveyQuestions2" class='surveyconfiguration' >-->
-            <!--<form action="" method="post" id="customtheme2">-->
-                <!--<p>-->
-                    <!--<label class="likertStatement">The tool was easy to use.</label>-->
-                    <!--<ul class='likert'>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="easy" value="strongly_agree">-->
-                        <!--<label>Strongly Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="easy" value="agree">-->
-                        <!--<label>Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="easy" value="somewhat_agree">-->
-                        <!--<label>Somewhat Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="easy" value="neutral">-->
-                        <!--<label>Neutral</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="easy" value="somewhat_disagree">-->
-                        <!--<label>Somewhat Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="easy" value="disagree">-->
-                        <!--<label>Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="easy" value="strongly_disagree">-->
-                        <!--<label>Strongly Disagree</label>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label class="likertStatement">The tool was fun to use.</label>-->
-                    <!--<ul class='likert'>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="fun" value="strongly_agree">-->
-                        <!--<label>Strongly Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="fun" value="agree">-->
-                        <!--<label>Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="fun" value="somewhat_agree">-->
-                        <!--<label>Somewhat Agree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="fun" value="neutral">-->
-                        <!--<label>Neutral</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="fun" value="somewhat_disagree">-->
-                        <!--<label>Somewhat Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="fun" value="disagree">-->
-                        <!--<label>Disagree</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="fun" value="strongly_disagree">-->
-                        <!--<label>Strongly Disagree</label>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label class="likertStatement">How successful were you in accomplishing what you were asked to do?</label>-->
-                    <!--<ul class='likert'>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="successful" value="very_successful">-->
-                        <!--<label>Very Successful</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="successful" value="successful">-->
-                        <!--<label>Successful</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="successful" value="somewhat_successful">-->
-                        <!--<label>Somewhat Successful</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="successful" value="neutral">-->
-                        <!--<label>Neutral</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="successful" value="somewhat_unsuccessful">-->
-                        <!--<label>Somewhat Unsuccessful</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="successful" value="unsuccessful">-->
-                        <!--<label>Unsuccessful</label>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<input type="radio" name="successful" value="very_unsuccessful">-->
-                        <!--<label>Very Unsuccessful</label>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label for="editFreq">How often do you typically contribute to Wikipedia?</label>-->
-                    <!--<select name="editFreq" id="editFreq">-->
-                        <!--<option value="never">Never</option>-->
-                        <!--<option value="yearly">Less than once a month</option>-->
-                        <!--<option value="monthly">Once a month or more</option>-->
-                        <!--<option value="monthly">Once a week or more</option>-->
-                        <!--<option value="monthly">Once a day or more</option>-->
-                    <!--</select>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label for="genderFreq">How often do you typically contribute to Wikipedia activities related to gender?</label>-->
-                    <!--<select name="genderFreq" id="genderFreq">-->
-                        <!--<option value="never">Never</option>-->
-                        <!--<option value="yearly">Less than once a month</option>-->
-                        <!--<option value="monthly">Once a month or more</option>-->
-                        <!--<option value="monthly">Once a week or more</option>-->
-                        <!--<option value="monthly">Once a day or more</option>-->
-                    <!--</select>-->
-                <!--</p>-->
-                <!--<input data-action="next" type="submit" name="submit" value="Submit" />-->
-                <!--<p class="error">&nbsp;</p>-->
-
-            <!--</form>-->
-        <!--</div>-->
-        <!--<div id="surveyQuestions3" class='surveyconfiguration' >-->
-            <!--<form action="" method="post" id="customtheme3">-->
-                <!--<p>-->
-                    <!--<label for="changeFeedback">Did at least one of the labels for each country provide a good summary of the articles?</label>-->
-                    <!--<textarea name="changeFeedback" id="changeFeedback" cols="40" rows="10"></textarea>-->
-                <!--</p>-->
-                <!--<p>-->
-                    <!--<label for="finalComments">Do you have any other feedback about this analyze_study_logs or the interactive map?</label>-->
-                    <!--<textarea name="finalComments" id="finalComments" cols="40" rows="10"></textarea>-->
-                <!--</p>-->
-                <!--<input data-action="next" type="submit" name="submit" value="Submit" />-->
-                <!--<p class="error">&nbsp;</p>-->
-            <!--</form>-->
-        <!--</div>-->
+        <div id="surveyQuestions2" class='surveyconfiguration' >
+            <form action="" method="post" id="customtheme4">
+                <p>
+                    <label for="compensation">Do you feel the HIT compensation ($3 total) was appropriate for the amount of time you spent completing the survey?</label>
+                    <textarea name="compensation" id="compensation" cols="50" rows="5"></textarea>
+                </p>
+                <p>
+                    <label for="otherFeedback">Do you have any other feedback?</label>
+                    <textarea name="otherFeedback" id="otherFeedback" cols="50" rows="5"></textarea>
+                </p>
+                <input data-action="next" type="submit" name="submit" value="Submit" />
+            </form>
+        </div>
 
         <div id="thankYou" class='thankyouconfiguration'>
 

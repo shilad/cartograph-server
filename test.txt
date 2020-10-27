@@ -1,6 +1,6 @@
 [DEFAULT]
-dataset: geography
-experimentID: 0012
+dataset: technology
+experimentID: 0001
 baseDir: ./experiment/%(dataset)s/%(experimentID)s
 generatedDir: ./data/%(dataset)s/%(experimentID)s
 

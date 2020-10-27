@@ -35,8 +35,7 @@ function Study(parentContainer) {
 	};
 
     this.tasks.push($('#surveyQuestions1'));
-//    this.tasks.push($('#surveyQuestions2'));
-//    this.tasks.push($('#surveyQuestions3'));
+    this.tasks.push($('#surveyQuestions2'));
     this.tasks.push($('#thankYou'));
 
     this.next = function() {
@@ -54,11 +53,6 @@ function Study(parentContainer) {
 		} else {
 			var surveyValues = validate.collectFormValues(currForm[0]);
 			var result = validate(surveyValues, constraints[currForm[0].id]);
-
-//			if (result) {
-//				errorP.html(htmlEncode("Please fill out all survey questions to help our research!")).fadeIn(500);
-//				return this;
-//			}
 		}
 
 		errorP.text('').hide();
@@ -77,8 +71,8 @@ function Study(parentContainer) {
 			? $(this.tasks[this.currentIndex + 1])
 			: null;
 
-        if(this.currentIndex + 1 < this.tasks.length - 4) {
-			let mapURL =  "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/4/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
+        if(this.currentIndex + 1 < this.tasks.length - 3) {
+			let mapURL =  "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/7/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
 			window.location.replace(mapURL);
 		}
 
@@ -99,7 +93,7 @@ function Study(parentContainer) {
 			this.turkerid = urlParams.get('turkerid');
 			this.hitid = urlParams.get('hitid');
 			this.checksum = crc32(this.turkerid + this.hitid);
-			var mapURL = "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/4/" + this.mapCenterDic[i][0] + "/" + this.mapCenterDic[i][1];
+			var mapURL = "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/7/" + this.mapCenterDic[i][0] + "/" + this.mapCenterDic[i][1];
 			window.location.replace(mapURL); 
 		} else {
 			$(this.tasks[i]).hide();
@@ -303,11 +297,11 @@ function showSurveyQuestions(dic) {
 				"<thead>" +
 					"<tr>" +
 						"<th scope='col'></th>" +
-						"<th scope='col' style='width: 9%'>Very Bad</th>" +
-						"<th scope='col' style='width: 13%'> </th>" +
-						"<th scope='col' style='width: 5%'>Neutral</th>" +
-						"<th scope='col' style='width: 9%'> </th>" +
-						"<th scope='col' style='width: 9%'>Very Good</th>" +
+						"<th scope='col' style='width: 10%'>Very Bad</th>" +
+						"<th scope='col' style='width: 10%'> </th>" +
+						"<th scope='col' style='width: 8%'>Neutral</th>" +
+						"<th scope='col' style='width: 10%'> </th>" +
+						"<th scope='col' style='width: 10%'>Very Good</th>" +
 					"</tr>" +
 				"</thead>" +
 				"<tbody>";
@@ -317,7 +311,6 @@ function showSurveyQuestions(dic) {
 			let labelhtmlStr =
 					"<tr>" +
 						"<th scope='row' style='pointer-events:none; text-align:center'>"  + dic[i][j] + "</th>";
-
 			for(var k = 0; k < ratings.length; k++) {
 				labelhtmlStr += " " +
 					"<td class='"+ colors[k] +" text-center'>" +
@@ -329,13 +322,13 @@ function showSurveyQuestions(dic) {
 			htmlStr += labelhtmlStr;
 		}
 		htmlStr += "</tbody></table>";
-		htmlStr+= "<p> <label class='taskLabel' for='task2Text'><strong><span></span> Additional missing labels? </label> <textarea name='feedback' id='task2Text' cols='30' rows='2' required></textarea></p>"
+		htmlStr+= "<p style='margin-bottom:0px'> <label class='taskLabel' for='task2Text'><strong><span></span> Additional missing labels? </label> <textarea name='feedback' id='task2Text' cols='45' rows='2' required></textarea></p>"
 
 		htmlStr += "<div class='row'>" +
-			 			"<div class='col-4'>" +
+			 			"<div class='col-3'>" +
 			 				"<input data-action=\"next\" type='submit' name='submit' value='Submit'/>" +
 			 			"</div>" +
-			 			"<div class='col-6'>" +
+			 			"<div class='col-7'>" +
 			 				"<p class=\"error\">&nbsp;</p>" +
 			 			"</div>" +
 			 		"</div>";

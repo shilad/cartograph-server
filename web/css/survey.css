@@ -18,7 +18,7 @@
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 600px;
+	width: 700px;
 	height: 500px;
 	position: absolute;
 	overflow: auto;
@@ -48,17 +48,19 @@
     font-size: 16px;
     line-height: 140%;
 }
-
 #startButtonContainer{
 	margin: 30px auto;
 	text-align: center;
 }
 
-
+#startStudyButton {
+	background-color: #ddffdd;
+	font-weight: bold;
+}
 
 #surveyContainer {
     font-size: 13px;
-    width: 410px;
+    width: 412px;
     position: absolute;
     top: 8vh;
     right: 10px;
@@ -80,7 +82,8 @@
 }
 
 #surveyContainer input[type='submit'] {
-	margin: 10px;
+	margin-bottom: 5px;
+	margin-top: 0px;
 }
 
 form.likertStatement {
@@ -106,11 +109,11 @@ form .likert:before {
   display:block;
   background-color:#efefef;
   height:4px;
-  width:78%;
+  width:0%;
 }
 form .likert li {
   display:inline-block;
-  width:12.5%;
+  width:30%;
   text-align:center;
   vertical-align: top;
 }
@@ -134,6 +137,7 @@ form p.error {
     font-weight: bold;
     display: none;
 }
+
 
 ul.share-buttons{
   list-style: none;
@@ -171,4 +175,8 @@ form .taskLabel span {
 hr {
     padding: 0px;
     margin: 0px;
+}
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 0rem !important;
 }

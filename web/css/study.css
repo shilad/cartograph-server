@@ -1,37 +1,75 @@
 .mydiv div:hover{background-color:rgba(240, 218, 53, 0.3); }
 
 .table tbody tr:hover {
-    background-color: #bcbcbc;
+    background-color: #cecdcd;
+}
+
+.table {
+    overflow-y: auto !important;
+    height: 10px;display:block;
+    height: 74%;
+    padding-right:10px;
+    margin-bottom: 0.2rem!important;
+    background-color: #ffffff73 !important;
+}
+
+.table thead th {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    background: #eee;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0rem !important;
+}
+
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+  background-color:  #efefef !important;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 1.5px !important;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+
+.table-danger,
+.table-danger > th,
+.table-danger > td {
+  background-color:  #ffffff !important;
+}
+
+.table tbody tr .table-primary:hover {
+    background-color: #cecdcd !important;
 }
 
 .table tbody tr .table-danger:hover {
-    background-color: #b9534f;
+    background-color: #cecdcd !important;
 }
 
-.table tbody tr .table-warning:hover {
-    background-color: #f0ad4e;
-}
-
-.table tbody tr .table-success:hover {
-    background-color: #5cb85c;
-}
 .itemconfiguration
 {
-		height: 70vh;
-		width:410px;
+		height: 90vh;
+		width:430px;
 		top:10px;
-		padding-right:15px;
+		padding-right:0px;
 		/* background-color:#CCC; */
-        overflow-y:auto;
+        overflow-y:hidden;
         overflow-x: hidden;
 		float:left;
 		position:relative;
-		margin-left:-10px;
-		margin-bottom:10px;
+		margin-left:-20px;
+		margin-bottom:-15px;
+		vertical-align: top;
 }
 .surveyconfiguration
 {
-		height: 85%;
+		height: 90%;
 		width:410px;
 		top:10px;
 		left:10px;
@@ -64,5 +102,5 @@
 }
 
 input[type='radio'] {
-    transform: scale(1.8);
+    transform: scale(1.4);
 }

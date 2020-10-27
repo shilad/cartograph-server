@@ -24,8 +24,6 @@ class ClusterMetric:
         alpha = 0.7 ** depth
 
         c = point.get('clusterid')
-        import logging
-        logging.warning(str(c) + " iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
         return self.colors[str(c)] + (alpha,)
 
         # important to switch back

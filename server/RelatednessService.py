@@ -61,5 +61,5 @@ if __name__ == '__main__':
     conf = Config.initConf(sys.argv[1])
     ps = PointService(conf)
     rs = RelatednessService(conf, ps)
-    for p, score in rs.related('dog'):
-        print p, score
+    # for p, score in rs.related('dog'):
+    #     print p, score
