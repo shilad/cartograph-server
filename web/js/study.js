@@ -47,7 +47,7 @@ function Study(parentContainer) {
 		if($(currTask).is(".task")) {
 			let labelLength = $(currForm).find(".table").find("tbody").find("tr").length;
 			if($(currForm).find(":checked").length  < labelLength) {
-				errorP.html(htmlEncode("You need to fill out all labels")).fadeIn(500);
+				errorP.html(htmlEncode("You need to fill out all labels. Scroll to see more labels.")).fadeIn(500);
 				return this;
 			}
 		} else {
