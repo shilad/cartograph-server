@@ -6,19 +6,12 @@
 
 .table {
     overflow-y: auto !important;
-    height: 10px;display:block;
     height: 74%;
     padding-right:10px;
-    margin-bottom: 0.2rem!important;
+    margin-bottom: 1rem!important;
     background-color: #ffffff73 !important;
 }
 
-.table thead th {
-    position: sticky;
-    z-index: 10;
-    top: 0;
-    background: #eee;
-}
 
 label {
     display: inline-block;
@@ -54,12 +47,12 @@ label {
 
 .itemconfiguration
 {
-		height: 90vh;
+		height: 95%;
 		width:430px;
 		top:10px;
-		padding-right:0px;
+		padding-right:10px;
 		/* background-color:#CCC; */
-        overflow-y:hidden;
+        overflow-y:auto;
         overflow-x: hidden;
 		float:left;
 		position:relative;
