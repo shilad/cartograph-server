@@ -149,11 +149,3 @@ function showCartoDemo() {
 		.start();
 }
 
-$(document).ready(function() {
-	$('#startStudyButton').click(function() {
-		$('body').chardinJs('start'); // Show the directions
-		$('#introContainer').hide();
-		showCartoDemo();
-	});
-	CG.log({ event : 'startSurvey' });
-});

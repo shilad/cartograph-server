@@ -46,8 +46,8 @@ function Study(parentContainer) {
 		let errorP = $(currForm).find(".error");
 		if($(currTask).is(".task")) {
 			let labelLength = $(currForm).find(".table").find("tbody").find("tr").length;
-			if($(currForm).find(":checked").length  < labelLength) {
-				errorP.html(htmlEncode("You need to fill out all labels. Scroll to see more labels.")).fadeIn(500);
+			if($(currForm).find(":checked").length  < 1 ){ //< labelLength) {
+				errorP.html(htmlEncode("You need to fill out all labels.")).fadeIn(500);
 				return this;
 			}
 		} else {
@@ -72,6 +72,15 @@ function Study(parentContainer) {
 			: null;
 
         if(this.currentIndex + 1 < this.tasks.length - 3) {
+            console.log("hihi");
+	        console.log(this.turkerid);
+	        let queryString = window.location.search;
+			let urlParams = new URLSearchParams(queryString);
+	        this.turkerid = urlParams.get('turkerid');
+			this.hitid = urlParams.get('hitid');
+			this.checksum = crc32(this.turkerid + this.hitid);
+			document.getElementById("checksum").innerHTML = "<b>" + this.checksum + "</b>";
+			alert(this.checksum);
 			let mapURL =  "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/7/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
 			window.location.replace(mapURL);
 		}
@@ -88,11 +97,6 @@ function Study(parentContainer) {
 	for(var i = 0; i < this.tasks.length; i++) {
 		if (i == this.currentIndex) {
 			$(this.tasks[i]).show();
-			let queryString = window.location.search;
-			let urlParams = new URLSearchParams(queryString);
-			this.turkerid = urlParams.get('turkerid');
-			this.hitid = urlParams.get('hitid');
-			this.checksum = crc32(this.turkerid + this.hitid);
 			var mapURL = "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/7/" + this.mapCenterDic[i][0] + "/" + this.mapCenterDic[i][1];
 			window.location.replace(mapURL); 
 		} else {
@@ -107,18 +111,6 @@ function Study(parentContainer) {
 	});
 }
 
-function checksum2(s) {
-  var hash = 0, strlen = s.length, i, c;
-  if ( strlen === 0 ) {
-    return hash;
-  }
-  for ( i = 0; i < strlen; i++ ) {
-    c = s.charCodeAt( i );
-    hash = ((hash << 5) - hash) + c;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return hash;
-};
 
 var makeCRCTable = function(){
     var c;
@@ -145,22 +137,15 @@ var crc32 = function(str) {
 };
 
 function replaceValues() {
-          var topic = window.location.pathname.split("/")[1];
-          let queryString = window.location.search;
-		  let urlParams = new URLSearchParams(queryString);
-		  this.turkerid = urlParams.get('turkerid');
-		  this.hitid = urlParams.get('hitid');
-		  this.checksum = crc32(this.turkerid + this.hitid);
+      var topic = window.location.pathname.split("/")[1];
 	  var mapName = topic.charAt(0).toUpperCase() + topic.slice(1);
 	  $("span.map-name").text(mapName);
-          //document.getElementById("replace1").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
-          //document.getElementById("replace2").innerHTML = topic.charAt(0).toUpperCase() + topic.slice(1);
-          document.getElementById("checksum").innerHTML = "<b>" + this.checksum + "</b>";
+      document.getElementById("checksum").innerHTML = "<b>" + this.checksum + "</b>";
 	  $("div[data-intro]").attr("data-intro", function(index, text) {
-                return text.replace('MAP-NAME', mapName);
-          });     
-
-        }
+      return text.replace('MAP-NAME', mapName);
+      }
+   );
+}
 function getMapCenterDic(){
 	let ret = {};
 	$.ajax({
@@ -322,7 +307,7 @@ function showSurveyQuestions(dic) {
 			htmlStr += labelhtmlStr;
 		}
 		htmlStr += "</tbody></table>";
-		htmlStr+= "<p style='margin-bottom:0px'> <label class='taskLabel' for='task2Text'><strong><span></span> Additional missing labels? </label> <textarea name='feedback' id='task2Text' cols='45' rows='2' required></textarea></p>"
+		htmlStr+= "<p> <label class='taskLabel' for='task2Text'><strong><span></span> Additional missing labels? </label> <textarea name='feedback' id='task2Text' cols='45' rows='2' required></textarea></p>"
 
 		htmlStr += "<div class='row'>" +
 			 			"<div class='col-3'>" +
@@ -336,3 +321,23 @@ function showSurveyQuestions(dic) {
 		country.append(htmlStr);
 	}
 }
+$(document).ready(function() {
+	$('#startStudyButton').click(function() {
+		$('body').chardinJs('start'); // Show the directions
+		let turkerid = document.forms["IDinfo"]["turkerID"].value;
+		let hitid = document.forms["IDinfo"]["hitid"].value;
+		if(turkerid != "" && hitid != ""){
+		    let curURL = window.location.href;
+		    let mapURL = curURL.replace("turkerid=", "turkerid=" + turkerid).replace("hitid=", "hitid=" + hitid);
+            window.history.replaceState("", "", mapURL);
+            $('#introContainer').hide();
+            showCartoDemo();
+		}
+		else {
+		    let errorP = $('#introContainer').find(".error");
+		    errorP.html(htmlEncode("You need to fill out your worker ID and HIT ID.")).fadeIn(500);
+		}
+	});
+	CG.log({ event : 'startSurvey' });
+});
+

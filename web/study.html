@@ -221,10 +221,23 @@
 			<p>The study should take about 15 minutes to complete. 
 			We will not  collect identifying information such as email or username, but we will record your navigation and responses, and your Mechanical Turk Worker Id. 
 			</p>
+
 			<p>This study has been approved by Macalester College's Institutional Review Board (IRB).
 			If you have questions about this study, please contact <a href="mailto:ssen@macalester.edu">Shilad Sen</a>. Thank you for participating!</p>
-			<div id="startButtonContainer">
+
+            <form action="" method="post" id="IDinfo">
+            <p>
+                <label for="turkerID">Please enter your worker ID</label>
+                <textarea type="text" name="turkerID" id="turkerID" cols = "30" rows="1" style="float:right;margin-right:15px"></textarea>
+            </p>
+            <p>
+                <label for="hitid">Please enter your HIT ID</label>
+                <textarea type="text" name="hitid" id="hitid" rows="1" cols="30" style="float:right;margin-right:15px"></textarea>
+            </p>
+            </form>
+                <div id="startButtonContainer">
 				<button id="startStudyButton">Start User Study</button>
+                <p class="error" style="color:red"> &nbsp;</p>
 			</div>
 		</div>
 	</div>
