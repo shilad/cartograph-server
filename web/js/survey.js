@@ -163,7 +163,7 @@ $(document).ready(function() {
 		}
 		else {
 		    let errorP = $('#introContainer').find(".error");
-		    errorP.html(htmlEncode("You need to fill out your worker ID and HIT ID.")).fadeIn(500);
+		    errorP.html(htmlEncode("Please fill out your worker ID and HIT ID.")).fadeIn(500);
 		}
 	});
 	CG.log({ event : 'startSurvey' });

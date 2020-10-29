@@ -78,7 +78,6 @@ function Study(parentContainer) {
 			this.hitid = urlParams.get('hitid');
 			this.checksum = crc32(this.turkerid + this.hitid);
 			document.getElementById("checksum").innerHTML = "<b>" + this.checksum + "</b>";
-			alert(this.checksum);
 			let mapURL =  "study.html?turkerid=" + this.turkerid + "&hitid=" + this.hitid + "#cluster/7/" + this.mapCenterDic[this.currentIndex + 1][0] + "/" + this.mapCenterDic[this.currentIndex + 1][1];
 			window.location.replace(mapURL);
 		}
