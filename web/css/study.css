@@ -47,7 +47,7 @@ label {
 
 .itemconfiguration
 {
-		height: 95%;
+		height: 89vh;
 		width:430px;
 		top:10px;
 		padding-right:10px;
@@ -57,12 +57,12 @@ label {
 		float:left;
 		position:relative;
 		margin-left:-20px;
-		margin-bottom:-15px;
+		margin-bottom:15px;
 		vertical-align: top;
 }
 .surveyconfiguration
 {
-		height: 90%;
+		height: 95%;
 		width:410px;
 		top:10px;
 		left:10px;
@@ -79,8 +79,8 @@ label {
 
 .thankyouconfiguration
 {
-		height: 28vh;
-		width:410px;
+		height: 100%;
+		width:100%;
 		top:10px;
 		left:10px;
 		right:10px;
@@ -91,7 +91,7 @@ label {
 		float:left;
 		position:relative;
 		margin-left:10px;
-		margin-bottom:10px;
+		margin-bottom:20px;
 }
 
 input[type='radio'] {

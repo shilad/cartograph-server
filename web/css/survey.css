@@ -61,7 +61,7 @@
 #surveyContainer {
     font-size: 13px;
     width: 412px;
-    height: 87%;
+    max-height: 95%;
     position: absolute;
     top: 5vh;
     right: 10px;
