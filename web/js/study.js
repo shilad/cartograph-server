@@ -319,23 +319,4 @@ function showSurveyQuestions(dic) {
 		country.append(htmlStr);
 	}
 }
-$(document).ready(function() {
-	$('#startStudyButton').click(function() {
-		$('body').chardinJs('start'); // Show the directions
-		let turkerid = document.forms["IDinfo"]["turkerID"].value;
-		let hitid = document.forms["IDinfo"]["hitid"].value;
-		if(turkerid != "" && hitid != ""){
-		    let curURL = window.location.href;
-		    let mapURL = curURL.replace("turkerid=", "turkerid=" + turkerid).replace("hitid=", "hitid=" + hitid);
-            window.history.replaceState("", "", mapURL);
-            $('#introContainer').hide();
-            showCartoDemo();
-		}
-		else {
-		    let errorP = $('#introContainer').find(".error");
-		    errorP.html(htmlEncode("You need to fill out your worker ID and HIT ID.")).fadeIn(500);
-		}
-	});
-	CG.log({ event : 'startSurvey' });
-});
 
