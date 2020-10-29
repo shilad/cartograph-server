@@ -72,8 +72,6 @@ function Study(parentContainer) {
 			: null;
 
         if(this.currentIndex + 1 < this.tasks.length - 3) {
-            console.log("hihi");
-	        console.log(this.turkerid);
 	        let queryString = window.location.search;
 			let urlParams = new URLSearchParams(queryString);
 	        this.turkerid = urlParams.get('turkerid');
